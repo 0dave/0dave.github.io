@@ -34,21 +34,21 @@
 
 <meta name="author" content="David Wang" />
 <meta name="description" content="" />
-<meta name="keywords" content="python second post">
+<meta name="keywords" content="python third post">
 <meta property="og:site_name" content="Dave's Blog"/>
-<meta property="og:title" content="Thanksgiving Diner Analysis"/>
+<meta property="og:title" content="Gun Death Analysis"/>
 <meta property="og:description" content=""/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://0dave.github.io/Thanksgiving Diner.html"/>
+<meta property="og:url" content="https://0dave.github.io/gundeath.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-01-18 20:00:00-05:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://0dave.github.io/author/david-wang.html">
 <meta property="article:section" content="posts"/>
-<meta property="article:tag" content="python second post"/>
+<meta property="article:tag" content="python third post"/>
 <meta property="og:image" content="//s.gravatar.com/avatar/5dc5ba59a94eeab2106ad9d397361b2c?s=120">
 
-  <title>Dave's Blog &ndash; Thanksgiving Diner Analysis</title>
+  <title>Dave's Blog &ndash; Gun Death Analysis</title>
 </head>
 <body>
 <!-- Google Tag Manager -->
@@ -122,7 +122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <article class="single">
   <header>
 
-    <h1 id="Thanksgiving Diner">Thanksgiving Diner Analysis</h1>
+    <h1 id="gundeath">Gun Death Analysis</h1>
     <p>
           Posted on January 18, 2017 in <a href="https://0dave.github.io/category/posts.html">posts</a>
 
@@ -1107,170 +1107,20 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"thanksgiving.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"Latin-1"</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'guns.csv'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>RespondentID</th>
-<th>Do you celebrate Thanksgiving?</th>
-<th>What is typically the main dish at your Thanksgiving dinner?</th>
-<th>What is typically the main dish at your Thanksgiving dinner? - Other (please specify)</th>
-<th>How is the main dish typically cooked?</th>
-<th>How is the main dish typically cooked? - Other (please specify)</th>
-<th>What kind of stuffing/dressing do you typically have?</th>
-<th>What kind of stuffing/dressing do you typically have? - Other (please specify)</th>
-<th>What type of cranberry saucedo you typically have?</th>
-<th>What type of cranberry saucedo you typically have? - Other (please specify)</th>
-<th>...</th>
-<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
-<th>Have you ever attended a "Friendsgiving?"</th>
-<th>Will you shop any Black Friday sales on Thanksgiving Day?</th>
-<th>Do you work in retail?</th>
-<th>Will you employer make you work on Black Friday?</th>
-<th>How would you describe where you live?</th>
-<th>Age</th>
-<th>What is your gender?</th>
-<th>How much total combined money did all members of your HOUSEHOLD earn last year?</th>
-<th>US Region</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>4337954960</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>None</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Suburban</td>
-<td>18 - 29</td>
-<td>Male</td>
-<td>$75,000 to $99,999</td>
-<td>Middle Atlantic</td>
-</tr>
-<tr>
-<th>1</th>
-<td>4337951949</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Other (please specify)</td>
-<td>Homemade cranberry gelatin ring</td>
-<td>...</td>
-<td>No</td>
-<td>No</td>
-<td>Yes</td>
-<td>No</td>
-<td>NaN</td>
-<td>Rural</td>
-<td>18 - 29</td>
-<td>Female</td>
-<td>$50,000 to $74,999</td>
-<td>East South Central</td>
-</tr>
-<tr>
-<th>2</th>
-<td>4337935621</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Roasted</td>
-<td>NaN</td>
-<td>Rice-based</td>
-<td>NaN</td>
-<td>Homemade</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-<td>NaN</td>
-<td>Suburban</td>
-<td>18 - 29</td>
-<td>Male</td>
-<td>$0 to $9,999</td>
-<td>Mountain</td>
-</tr>
-<tr>
-<th>3</th>
-<td>4337933040</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Homemade</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Urban</td>
-<td>30 - 44</td>
-<td>Male</td>
-<td>$200,000 and up</td>
-<td>Pacific</td>
-</tr>
-<tr>
-<th>4</th>
-<td>4337931983</td>
-<td>Yes</td>
-<td>Tofurkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Canned</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Urban</td>
-<td>30 - 44</td>
-<td>Male</td>
-<td>$100,000 to $124,999</td>
-<td>Pacific</td>
-</tr>
-</tbody>
-</table>
-<p>5 rows × 65 columns</p>
-</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[['', 'year', 'month', 'intent', 'police', 'sex', 'age', 'race', 'hispanic', 'place', 'education'], ['1', '2012', '01', 'Suicide', '0', 'M', '34', 'Asian/Pacific Islander', '100', 'Home', '4'], ['2', '2012', '01', 'Suicide', '0', 'F', '21', 'White', '100', 'Street', '3'], ['3', '2012', '01', 'Suicide', '0', 'M', '60', 'White', '100', 'Other specified', '4'], ['4', '2012', '02', 'Suicide', '0', 'M', '64', 'White', '100', 'Home', '4']]
+</pre>
 </div>
 </div>
 </div>
@@ -1281,78 +1131,21 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Index(['RespondentID', 'Do you celebrate Thanksgiving?',
-       'What is typically the main dish at your Thanksgiving dinner?',
-       'What is typically the main dish at your Thanksgiving dinner? - Other (please specify)',
-       'How is the main dish typically cooked?',
-       'How is the main dish typically cooked? - Other (please specify)',
-       'What kind of stuffing/dressing do you typically have?',
-       'What kind of stuffing/dressing do you typically have? - Other (please specify)',
-       'What type of cranberry saucedo you typically have?',
-       'What type of cranberry saucedo you typically have? - Other (please specify)',
-       'Do you typically have gravy?',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Brussel sprouts',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Carrots',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cauliflower',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Corn',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cornbread',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Fruit salad',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Green beans/green bean casserole',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Macaroni and cheese',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Mashed potatoes',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Rolls/biscuits',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Squash',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Vegetable salad',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Yams/sweet potato casserole',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Buttermilk',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Cherry',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Chocolate',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Coconut cream',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Key lime',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Peach',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Sweet Potato',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - None',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Apple cobbler',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Blondies',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Brownies',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Carrot cake',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cheesecake',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cookies',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Fudge',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Ice cream',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Peach cobbler',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - None',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify)',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify).1',
-       'Do you typically pray before or after the Thanksgiving meal?',
-       'How far will you travel for Thanksgiving?',
-       'Will you watch any of the following programs on Thanksgiving? Please select all that apply. - Macy's Parade',
-       'What's the age cutoff at your "kids' table" at Thanksgiving?',
-       'Have you ever tried to meet up with hometown friends on Thanksgiving night?',
-       'Have you ever attended a "Friendsgiving?"',
-       'Will you shop any Black Friday sales on Thanksgiving Day?',
-       'Do you work in retail?',
-       'Will you employer make you work on Black Friday?',
-       'How would you describe where you live?', 'Age', 'What is your gender?',
-       'How much total combined money did all members of your HOUSEHOLD earn last year?',
-       'US Region'],
-      dtype='object')</pre>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['', 'year', 'month', 'intent', 'police', 'sex', 'age', 'race', 'hispanic', 'place', 'education']
+[['1', '2012', '01', 'Suicide', '0', 'M', '34', 'Asian/Pacific Islander', '100', 'Home', '4'], ['2', '2012', '01', 'Suicide', '0', 'F', '21', 'White', '100', 'Street', '3'], ['3', '2012', '01', 'Suicide', '0', 'M', '60', 'White', '100', 'Other specified', '4'], ['4', '2012', '02', 'Suicide', '0', 'M', '64', 'White', '100', 'Home', '4'], ['5', '2012', '02', 'Suicide', '0', 'M', '31', 'White', '100', 'Other specified', '2']]
+</pre>
 </div>
 </div>
 </div>
@@ -1363,18 +1156,24 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="n">year_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">year_counts</span><span class="p">:</span>
+        <span class="n">year_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">year_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">year_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">year_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Yes    980
-No      78
-Name: Do you celebrate Thanksgiving?, dtype: int64</pre>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{'2012': 33563, '2014': 33599, '2013': 33636}
+</pre>
 </div>
 </div>
 </div>
@@ -1385,8 +1184,30 @@ Name: Do you celebrate Thanksgiving?, dtype: int64</pre>
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span><span class="o">==</span><span class="s2">"Yes"</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+    
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">month</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dates</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="n">date_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">date_counts</span><span class="p">:</span>
+        <span class="n">date_counts</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_counts</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">date_counts</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">date_counts</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[datetime.datetime(2012, 1, 1, 0, 0), datetime.datetime(2012, 1, 1, 0, 0), datetime.datetime(2012, 1, 1, 0, 0), datetime.datetime(2012, 2, 1, 0, 0), datetime.datetime(2012, 2, 1, 0, 0)]
+{datetime.datetime(2012, 12, 1, 0, 0): 2791, datetime.datetime(2014, 1, 1, 0, 0): 2651, datetime.datetime(2014, 7, 1, 0, 0): 2884, datetime.datetime(2013, 2, 1, 0, 0): 2375, datetime.datetime(2014, 4, 1, 0, 0): 2862, datetime.datetime(2013, 4, 1, 0, 0): 2798, datetime.datetime(2013, 12, 1, 0, 0): 2765, datetime.datetime(2013, 5, 1, 0, 0): 2806, datetime.datetime(2013, 1, 1, 0, 0): 2864, datetime.datetime(2012, 9, 1, 0, 0): 2852, datetime.datetime(2013, 11, 1, 0, 0): 2758, datetime.datetime(2013, 10, 1, 0, 0): 2808, datetime.datetime(2014, 2, 1, 0, 0): 2361, datetime.datetime(2014, 8, 1, 0, 0): 2970, datetime.datetime(2012, 6, 1, 0, 0): 2826, datetime.datetime(2014, 10, 1, 0, 0): 2865, datetime.datetime(2014, 9, 1, 0, 0): 2914, datetime.datetime(2012, 7, 1, 0, 0): 3026, datetime.datetime(2014, 5, 1, 0, 0): 2864, datetime.datetime(2012, 11, 1, 0, 0): 2729, datetime.datetime(2012, 1, 1, 0, 0): 2758, datetime.datetime(2013, 9, 1, 0, 0): 2742, datetime.datetime(2012, 5, 1, 0, 0): 2999, datetime.datetime(2013, 8, 1, 0, 0): 2859, datetime.datetime(2013, 7, 1, 0, 0): 3079, datetime.datetime(2014, 3, 1, 0, 0): 2684, datetime.datetime(2012, 3, 1, 0, 0): 2743, datetime.datetime(2012, 8, 1, 0, 0): 2954, datetime.datetime(2014, 11, 1, 0, 0): 2756, datetime.datetime(2012, 2, 1, 0, 0): 2357, datetime.datetime(2012, 10, 1, 0, 0): 2733, datetime.datetime(2013, 6, 1, 0, 0): 2920, datetime.datetime(2013, 3, 1, 0, 0): 2862, datetime.datetime(2014, 6, 1, 0, 0): 2931, datetime.datetime(2012, 4, 1, 0, 0): 2795, datetime.datetime(2014, 12, 1, 0, 0): 2857}
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1396,26 +1217,44 @@ Name: Do you celebrate Thanksgiving?, dtype: int64</pre>
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sex_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="ow">in</span> <span class="n">sex_counts</span><span class="p">:</span>
+        <span class="n">sex_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sex_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">race_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="ow">in</span> <span class="n">race_counts</span><span class="p">:</span>
+        <span class="n">race_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">race_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">race_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Turkey                    859
-Other (please specify)     35
-Ham/Pork                   29
-Tofurkey                   20
-Chicken                    12
-Roast beef                 11
-I don't know                5
-Turducken                   3
-Name: What is typically the main dish at your Thanksgiving dinner?, dtype: int64</pre>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{'M': 86349, 'F': 14449}
+{'Native American/Native Alaskan': 917, 'Hispanic': 9022, 'Black': 23296, 'Asian/Pacific Islander': 1326, 'White': 66237}
+</pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Thoughts">Thoughts<a class="anchor-link" href="#Thoughts">¶</a></h2><p>The male is obviously the majority victims of gun violence.
+The racial profile of gun vilolence need more examination, for white and black.</p>
 </div>
 </div>
 </div>
@@ -1424,18 +1263,19 @@ Name: What is typically the main dish at your Thanksgiving dinner?, dtype: int64
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you typically have gravy?"</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span><span class="o">==</span><span class="s2">"Tofurkey"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"census.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
+<span class="n">census</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">census</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Yes    12
-No      8
-Name: Do you typically have gravy?, dtype: int64</pre>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[['Id', 'Year', 'Id', 'Sex', 'Id', 'Hispanic Origin', 'Id', 'Id2', 'Geography', 'Total', 'Race Alone - White', 'Race Alone - Hispanic', 'Race Alone - Black or African American', 'Race Alone - American Indian and Alaska Native', 'Race Alone - Asian', 'Race Alone - Native Hawaiian and Other Pacific Islander', 'Two or More Races'], ['cen42010', 'April 1, 2010 Census', 'totsex', 'Both Sexes', 'tothisp', 'Total', '0100000US', '', 'United States', '308745538', '197318956', '44618105', '40250635', '3739506', '15159516', '674625', '6984195']]
+</pre>
 </div>
 </div>
 </div>
@@ -1446,65 +1286,18 @@ Name: Do you typically have gravy?, dtype: int64</pre>
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">apple_isnull</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple"</span><span class="p">])</span>
-<span class="n">pumpkin_isnull</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin"</span><span class="p">])</span>
-<span class="n">pecan_isnull</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan"</span><span class="p">])</span>
-<span class="n">ate_pies</span> <span class="o">=</span> <span class="n">apple_isnull</span> <span class="o">&</span> <span class="n">pumpkin_isnull</span> <span class="o">&</span> <span class="n">pecan_isnull</span>
-<span class="n">ate_pies</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>False    876
-True     104
-dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [8]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>45 - 59    269
-60+        258
-30 - 44    235
-18 - 29    185
-Name: Age, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_age</span><span class="p">(</span><span class="n">age_str</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">age_str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">age_str</span> <span class="o">=</span> <span class="n">age_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">age_str</span> <span class="o">=</span> <span class="n">age_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"+"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">age_str</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Asian/Pacific Islander'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15159516</span> <span class="o">+</span> <span class="mi">674625</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Native American/Native Alaskan'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3739506</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Hispanic'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">44618105</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'White'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">197318956</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Black'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">40250635</span>
 
-<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_age</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">race_per_hundredk</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">race_counts</span><span class="p">:</span>
+    <span class="n">race_per_hundredk</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">race_counts</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">/</span> <span class="n">mapping</span><span class="p">[</span><span class="n">r</span><span class="p">])</span><span class="o">*</span> <span class="mi">100000</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">race_per_hundredk</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1512,63 +1305,9 @@ Name: Age, dtype: int64</pre>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/dataquest/system/env/python3/lib/python3.4/site-packages/numpy/lib/function_base.py:3834: RuntimeWarning: Invalid value encountered in percentile
-  RuntimeWarning)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{'Native American/Native Alaskan': 24.521955573811088, 'Hispanic': 20.220491210910907, 'Asian/Pacific Islander': 8.374309664161762, 'Black': 57.8773477735196, 'White': 33.56849303419181}
 </pre>
-</div>
-</div>
-<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>count    947.000000
-mean      40.089757
-std       15.352014
-min       18.000000
-25%             NaN
-50%             NaN
-75%             NaN
-max       60.000000
-Name: int_age, dtype: float64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Findings">Findings<a class="anchor-link" href="#Findings">¶</a></h2><p>Although we only have a rough approximation of age, and it skews downward because we took the first value in each string (the lower bound), we can see that that age groups of respondents are fairly evenly distributed.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>$25,000 to $49,999      166
-$75,000 to $99,999      127
-$50,000 to $74,999      127
-Prefer not to answer    118
-$100,000 to $124,999    109
-$200,000 and up          76
-$10,000 to $24,999       60
-$0 to $9,999             52
-$125,000 to $149,999     48
-$150,000 to $174,999     38
-$175,000 to $199,999     26
-Name: How much total combined money did all members of your HOUSEHOLD earn last year?, dtype: int64</pre>
 </div>
 </div>
 </div>
@@ -1579,18 +1318,21 @@ Name: How much total combined money did all members of your HOUSEHOLD earn last 
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_income</span><span class="p">(</span><span class="n">income</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">income</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">income</span> <span class="o">=</span> <span class="n">income</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">income</span> <span class="o">==</span> <span class="s2">"Prefer"</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">income</span> <span class="o">=</span> <span class="n">income</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"$"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
-    <span class="n">income</span> <span class="o">=</span> <span class="n">income</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">income</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">intents</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="n">races</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
 
-<span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_income</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">homicide_race_per_hundredk</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">race</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">races</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">race</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">homicide_race_per_hundredk</span><span class="p">:</span>
+        <span class="n">homicide_race_per_hundredk</span><span class="p">[</span><span class="n">race</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">intents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Homicide"</span><span class="p">:</span>
+        <span class="n">homicide_race_per_hundredk</span><span class="p">[</span><span class="n">race</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">homicide_race_per_hundredk</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">homicide_race_per_hundredk</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">/</span> <span class="n">mapping</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100000</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">homicide_race_per_hundredk</span><span class="p">)</span>
+    
 </pre></div>
 </div>
 </div>
@@ -1598,194 +1340,11 @@ Name: How much total combined money did all members of your HOUSEHOLD earn last 
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/dataquest/system/env/python3/lib/python3.4/site-packages/numpy/lib/function_base.py:3834: RuntimeWarning: Invalid value encountered in percentile
-  RuntimeWarning)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{'Hispanic': 12.627161104219914, 'Black': 48.471284987180944, 'White': 4.6356417981453335, 'Asian/Pacific Islander': 3.530346230970155, 'Native American/Native Alaskan': 8.717729026240365}
 </pre>
 </div>
 </div>
-<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>count       829.000000
-mean      75965.018094
-std       59068.636748
-min           0.000000
-25%                NaN
-50%                NaN
-75%                NaN
-max      200000.000000
-Name: int_income, dtype: float64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Findings">Findings<a class="anchor-link" href="#Findings">¶</a></h2><p>Although we only have a rough approximation of income, and it skews downward because we took the first value in each string (the lower bound), the average income seems to be fairly high, while there is also a large standard deviation.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [18]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span><span class="o"><</span><span class="mi">150000</span><span class="p">][</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Thanksgiving is happening at my home--I won't travel at all                         281
-Thanksgiving is local--it will take place in the town I live in                     203
-Thanksgiving is out of town but not too far--it's a drive of a few hours or less    150
-Thanksgiving is out of town and far away--I have to drive several hours or fly       55
-Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [20]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span><span class="o">></span><span class="mi">150000</span><span class="p">][</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Thanksgiving is happening at my home--I won't travel at all                         49
-Thanksgiving is local--it will take place in the town I live in                     25
-Thanksgiving is out of town but not too far--it's a drive of a few hours or less    16
-Thanksgiving is out of town and far away--I have to drive several hours or fly      12
-Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Finding">Finding<a class="anchor-link" href="#Finding">¶</a></h2><p>It looks like more people with high income have Thanksgiving at home than people with low income. This probably because younger people like students, who don't have a high income, tend to go home, whearas parents, who have higher incomes, don't.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [24]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="s2">"Have you ever attended a </span><span class="se">\"</span><span class="s2">Friendsgiving?</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"int_age"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[24]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>Have you ever attended a "Friendsgiving?"</th>
-<th>No</th>
-<th>Yes</th>
-</tr>
-<tr>
-<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>No</th>
-<td>42.283702</td>
-<td>37.010526</td>
-</tr>
-<tr>
-<th>Yes</th>
-<td>41.475410</td>
-<td>33.976744</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [31]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="s2">"Have you ever attended a </span><span class="se">\"</span><span class="s2">Friendsgiving?</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="s2">"int_income"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[31]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>Have you ever attended a "Friendsgiving?"</th>
-<th>No</th>
-<th>Yes</th>
-</tr>
-<tr>
-<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>No</th>
-<td>78914.549654</td>
-<td>72894.736842</td>
-</tr>
-<tr>
-<th>Yes</th>
-<td>78750.000000</td>
-<td>66019.736842</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Findings">Findings<a class="anchor-link" href="#Findings">¶</a></h2><p>It appears that people who are younger are more likely to attend a Friendsgiving, and try to meet up with friends on Thanksgiving</p>
 </div>
 </div>
 </div>
@@ -1842,7 +1401,7 @@ Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
 
   <div class="tag-cloud">
     <p>
-      <a href="https://0dave.github.io/tag/python-second-post.html">python second post</a>
+      <a href="https://0dave.github.io/tag/python-third-post.html">python third post</a>
     </p>
   </div>
 
