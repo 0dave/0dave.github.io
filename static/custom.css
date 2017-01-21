@@ -43,7 +43,7 @@ div.output.output_scroll {
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    background: white;
+    background: #484848;
 }
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: #484848; 
@@ -54,7 +54,7 @@ div.output.output_scroll {
 
 
 /* GLOBALS */
-body {background-color: #1e1e1e;}
+body {background-color: white;}
 a {color: #7587a6;}
 
 /* INTRO PAGE */
