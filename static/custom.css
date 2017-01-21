@@ -34,13 +34,16 @@ div.output.output_scroll {
 /*Scroll bars*/
 ::-webkit-scrollbar {
     width: 12px;
+    
+    
+    
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    background: #484848;
+    background: white;
 }
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: #484848; 
