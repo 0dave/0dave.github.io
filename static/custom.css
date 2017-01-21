@@ -19,8 +19,8 @@ div#notebook, div.CodeMirror, div.output_area pre, div.output_wrapper, div.promp
 /*Sherif's customizations*/
 
 /*Otherwise, a lot of backgrounds are white.*/
-div#notebook {background-color: #1e1e1e; border-top: none;}
-div#notebook-container {background-color: #1e1e1e;}
+/*div#notebook {background-color: #1e1e1e; border-top: none;}*/
+/*div#notebook-container {background-color: #1e1e1e;}*/
 
 /*Don't need to see jupyter logo, filename, last saved, etc.*/
 div#header-container { display: none; }
