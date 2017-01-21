@@ -18,49 +18,4 @@ div#notebook, div.CodeMirror, div.output_area pre, div.output_wrapper, div.promp
 
 /*Sherif's customizations*/
 
-/*Otherwise, a lot of backgrounds are white.*/
-div#notebook {background-color: white; border-top: none;}
-div#notebook-container {background-color: white;}
 
-/*Don't need to see jupyter logo, filename, last saved, etc.*/
-div#header-container { display: none; }
-
-/*This prevents scrollable output from having an ugly grey
-shadow around it*/
-div.output.output_scroll {
-    box-shadow: none;
-}
-
-/*Scroll bars*/
-::-webkit-scrollbar {
-    width: 12px;
-    
-    
-    
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    background: #484848;
-}
-::-webkit-scrollbar-thumb:window-inactive {
-	background: #484848; 
-}
-
-
-/*########################*/
-
-
-/* GLOBALS */
-body {background-color: white;}
-a {color: #7587a6;}
-
-/* INTRO PAGE */
-.toolbar_info, .list_container {color: #c3c3c3;}
-
-/* NOTEBOOK */
-
-/* comment out this line to bring the toolbar back */
-/*div#maintoolbar, div#header {display: none !important;}*/
