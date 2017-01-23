@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Dave's Blog</title><link href="https://0dave.github.io/" rel="alternate"></link><link href="https://0dave.github.io/feeds/all.atom.xml" rel="self"></link><id>https://0dave.github.io/</id><updated>2017-01-18T20:00:00-05:00</updated><entry><title>Thanksgiving Diner Analysis</title><link href="https://0dave.github.io/ThanksgivingDiner.html" rel="alternate"></link><published>2017-01-18T20:00:00-05:00</published><updated>2017-01-18T20:00:00-05:00</updated><author><name>David Wang</name></author><id>tag:0dave.github.io,2017-01-18:ThanksgivingDiner.html</id><summary type="html">
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In this project, I am analyzing data on Thanksgiving dinner in the US. The dataset came from FiveThirtyEight, and can be found here.&lt;/p&gt;
+&lt;p&gt;The dataset is stored in the thanksgiving.csv file. It contains 1058 responses to an online survey about what Americans eat for Thanksgiving dinner. Each survey respondent was asked questions about what they typically eat for Thanksgiving, along with some demographic.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [21]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
@@ -14,7 +24,7 @@
 &lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[1]:&lt;/div&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[21]:&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
 &lt;div&gt;
 &lt;table border="1" class="dataframe"&gt;
@@ -176,7 +186,7 @@
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [19]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;
@@ -186,7 +196,7 @@
 &lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[2]:&lt;/div&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[19]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
 &lt;pre&gt;Index([u'RespondentID', u'Do you celebrate Thanksgiving?',
        u'What is typically the main dish at your Thanksgiving dinner?',
@@ -712,7 +722,7 @@ Name: How far will you travel for Thanksgiving?, dtype: int64&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="python second post"></category></entry><entry><title>Gun Death Analysis</title><link href="https://0dave.github.io/gundeath.html" rel="alternate"></link><published>2017-01-18T20:00:00-05:00</published><updated>2017-01-18T20:00:00-05:00</updated><author><name>David Wang</name></author><id>tag:0dave.github.io,2017-01-18:gundeath.html</id><summary type="html">
+</summary><category term="python second post"></category></entry><entry><title>Gun Death Analysis</title><link href="https://0dave.github.io/gundeath.html" rel="alternate"></link><published>2017-01-10T20:00:00-05:00</published><updated>2017-01-10T20:00:00-05:00</updated><author><name>David Wang</name></author><id>tag:0dave.github.io,2017-01-10:gundeath.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
