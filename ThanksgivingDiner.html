@@ -46,7 +46,7 @@
 <meta property="article:author" content="https://0dave.github.io/author/david-wang.html">
 <meta property="article:section" content="posts"/>
 <meta property="article:tag" content="python second post"/>
-<meta property="og:image" content="//s.gravatar.com/avatar/5dc5ba59a94eeab2106ad9d397361b2c?s=120">
+<meta property="og:image" content="//https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAhrAAAAJDcxYjFjNzlkLWNlMjAtNGI4MC1hNTg5LWU3ODNmNWM3NmFmNA.jpg">
 
   <title>Dave's Blog &ndash; Thanksgiving Diner Analysis</title>
 </head>
@@ -62,11 +62,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->  <aside>
     <div>
       <a href="https://0dave.github.io">
-        <img src="//s.gravatar.com/avatar/5dc5ba59a94eeab2106ad9d397361b2c?s=120" alt="" title="">
+        <img src="//https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAhrAAAAJDcxYjFjNzlkLWNlMjAtNGI4MC1hNTg5LWU3ODNmNWM3NmFmNA.jpg" alt="" title="">
       </a>
       <h1><a href="https://0dave.github.io"></a></h1>
 
-<p>Data Scientist - SQL.BI Developer/Analyst</p>
+<p>Data Scientist * Business Intelligence</p>
       <nav>
         <ul class="list">
 
@@ -145,173 +145,141 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"thanksgiving.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"Latin-1"</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>RespondentID</th>
-<th>Do you celebrate Thanksgiving?</th>
-<th>What is typically the main dish at your Thanksgiving dinner?</th>
-<th>What is typically the main dish at your Thanksgiving dinner? - Other (please specify)</th>
-<th>How is the main dish typically cooked?</th>
-<th>How is the main dish typically cooked? - Other (please specify)</th>
-<th>What kind of stuffing/dressing do you typically have?</th>
-<th>What kind of stuffing/dressing do you typically have? - Other (please specify)</th>
-<th>What type of cranberry saucedo you typically have?</th>
-<th>What type of cranberry saucedo you typically have? - Other (please specify)</th>
-<th>...</th>
-<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
-<th>Have you ever attended a "Friendsgiving?"</th>
-<th>Will you shop any Black Friday sales on Thanksgiving Day?</th>
-<th>Do you work in retail?</th>
-<th>Will you employer make you work on Black Friday?</th>
-<th>How would you describe where you live?</th>
-<th>Age</th>
-<th>What is your gender?</th>
-<th>How much total combined money did all members of your HOUSEHOLD earn last year?</th>
-<th>US Region</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>4337954960</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>None</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Suburban</td>
-<td>18 - 29</td>
-<td>Male</td>
-<td>$75,000 to $99,999</td>
-<td>Middle Atlantic</td>
-</tr>
-<tr>
-<th>1</th>
-<td>4337951949</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Other (please specify)</td>
-<td>Homemade cranberry gelatin ring</td>
-<td>...</td>
-<td>No</td>
-<td>No</td>
-<td>Yes</td>
-<td>No</td>
-<td>NaN</td>
-<td>Rural</td>
-<td>18 - 29</td>
-<td>Female</td>
-<td>$50,000 to $74,999</td>
-<td>East South Central</td>
-</tr>
-<tr>
-<th>2</th>
-<td>4337935621</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Roasted</td>
-<td>NaN</td>
-<td>Rice-based</td>
-<td>NaN</td>
-<td>Homemade</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-<td>NaN</td>
-<td>Suburban</td>
-<td>18 - 29</td>
-<td>Male</td>
-<td>$0 to $9,999</td>
-<td>Mountain</td>
-</tr>
-<tr>
-<th>3</th>
-<td>4337933040</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Homemade</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Urban</td>
-<td>30 - 44</td>
-<td>Male</td>
-<td>$200,000 and up</td>
-<td>Pacific</td>
-</tr>
-<tr>
-<th>4</th>
-<td>4337931983</td>
-<td>Yes</td>
-<td>Tofurkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Canned</td>
-<td>NaN</td>
-<td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Urban</td>
-<td>30 - 44</td>
-<td>Male</td>
-<td>$100,000 to $124,999</td>
-<td>Pacific</td>
-</tr>
-</tbody>
-</table>
-<p>5 rows × 65 columns</p>
-</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>   RespondentID Do you celebrate Thanksgiving?  \
+0    4337954960                            Yes   
+1    4337951949                            Yes   
+2    4337935621                            Yes   
+3    4337933040                            Yes   
+4    4337931983                            Yes   
+
+  What is typically the main dish at your Thanksgiving dinner?  \
+0                                             Turkey             
+1                                             Turkey             
+2                                             Turkey             
+3                                             Turkey             
+4                                           Tofurkey             
+
+  What is typically the main dish at your Thanksgiving dinner? - Other (please specify)  \
+0                                                NaN                                      
+1                                                NaN                                      
+2                                                NaN                                      
+3                                                NaN                                      
+4                                                NaN                                      
+
+  How is the main dish typically cooked?  \
+0                                  Baked   
+1                                  Baked   
+2                                Roasted   
+3                                  Baked   
+4                                  Baked   
+
+  How is the main dish typically cooked? - Other (please specify)  \
+0                                                NaN                
+1                                                NaN                
+2                                                NaN                
+3                                                NaN                
+4                                                NaN                
+
+  What kind of stuffing/dressing do you typically have?  \
+0                                        Bread-based      
+1                                        Bread-based      
+2                                         Rice-based      
+3                                        Bread-based      
+4                                        Bread-based      
+
+  What kind of stuffing/dressing do you typically have? - Other (please specify)  \
+0                                                NaN                               
+1                                                NaN                               
+2                                                NaN                               
+3                                                NaN                               
+4                                                NaN                               
+
+  What type of cranberry saucedo you typically have?  \
+0                                               None   
+1                             Other (please specify)   
+2                                           Homemade   
+3                                           Homemade   
+4                                             Canned   
+
+  What type of cranberry saucedo you typically have? - Other (please specify)  \
+0                                                NaN                            
+1                    Homemade cranberry gelatin ring                            
+2                                                NaN                            
+3                                                NaN                            
+4                                                NaN                            
+
+          ...          \
+0         ...           
+1         ...           
+2         ...           
+3         ...           
+4         ...           
+
+  Have you ever tried to meet up with hometown friends on Thanksgiving night?  \
+0                                                Yes                            
+1                                                 No                            
+2                                                Yes                            
+3                                                Yes                            
+4                                                Yes                            
+
+  Have you ever attended a "Friendsgiving?"  \
+0                                        No   
+1                                        No   
+2                                       Yes   
+3                                        No   
+4                                        No   
+
+  Will you shop any Black Friday sales on Thanksgiving Day?  \
+0                                                 No          
+1                                                Yes          
+2                                                Yes          
+3                                                 No          
+4                                                 No          
+
+  Do you work in retail? Will you employer make you work on Black Friday?  \
+0                     No                                              NaN   
+1                     No                                              NaN   
+2                     No                                              NaN   
+3                     No                                              NaN   
+4                     No                                              NaN   
+
+  How would you describe where you live?      Age What is your gender?  \
+0                               Suburban  18 - 29                 Male   
+1                                  Rural  18 - 29               Female   
+2                               Suburban  18 - 29                 Male   
+3                                  Urban  30 - 44                 Male   
+4                                  Urban  30 - 44                 Male   
+
+  How much total combined money did all members of your HOUSEHOLD earn last year?  \
+0                                 $75,000 to $99,999                                
+1                                 $50,000 to $74,999                                
+2                                       $0 to $9,999                                
+3                                    $200,000 and up                                
+4                               $100,000 to $124,999                                
+
+            US Region  
+0     Middle Atlantic  
+1  East South Central  
+2            Mountain  
+3             Pacific  
+4             Pacific  
+
+[5 rows x 65 columns]
+</pre>
 </div>
 </div>
 </div>
@@ -944,7 +912,7 @@ Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
   "@type" : "Blog",
   "name": " Dave's Blog ",
   "url" : "https://0dave.github.io",
-  "image": "//s.gravatar.com/avatar/5dc5ba59a94eeab2106ad9d397361b2c?s=120",
+  "image": "//https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAhrAAAAJDcxYjFjNzlkLWNlMjAtNGI4MC1hNTg5LWU3ODNmNWM3NmFmNA.jpg",
   "description": "David Sh Wang's Thoughts and Writings"
 }
 </script>

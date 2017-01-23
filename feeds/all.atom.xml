@@ -12,173 +12,141 @@
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [21]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [23]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"thanksgiving.csv"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Latin-1"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[21]:&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
-&lt;div&gt;
-&lt;table border="1" class="dataframe"&gt;
-&lt;thead&gt;
-&lt;tr style="text-align: right;"&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;RespondentID&lt;/th&gt;
-&lt;th&gt;Do you celebrate Thanksgiving?&lt;/th&gt;
-&lt;th&gt;What is typically the main dish at your Thanksgiving dinner?&lt;/th&gt;
-&lt;th&gt;What is typically the main dish at your Thanksgiving dinner? - Other (please specify)&lt;/th&gt;
-&lt;th&gt;How is the main dish typically cooked?&lt;/th&gt;
-&lt;th&gt;How is the main dish typically cooked? - Other (please specify)&lt;/th&gt;
-&lt;th&gt;What kind of stuffing/dressing do you typically have?&lt;/th&gt;
-&lt;th&gt;What kind of stuffing/dressing do you typically have? - Other (please specify)&lt;/th&gt;
-&lt;th&gt;What type of cranberry saucedo you typically have?&lt;/th&gt;
-&lt;th&gt;What type of cranberry saucedo you typically have? - Other (please specify)&lt;/th&gt;
-&lt;th&gt;...&lt;/th&gt;
-&lt;th&gt;Have you ever tried to meet up with hometown friends on Thanksgiving night?&lt;/th&gt;
-&lt;th&gt;Have you ever attended a "Friendsgiving?"&lt;/th&gt;
-&lt;th&gt;Will you shop any Black Friday sales on Thanksgiving Day?&lt;/th&gt;
-&lt;th&gt;Do you work in retail?&lt;/th&gt;
-&lt;th&gt;Will you employer make you work on Black Friday?&lt;/th&gt;
-&lt;th&gt;How would you describe where you live?&lt;/th&gt;
-&lt;th&gt;Age&lt;/th&gt;
-&lt;th&gt;What is your gender?&lt;/th&gt;
-&lt;th&gt;How much total combined money did all members of your HOUSEHOLD earn last year?&lt;/th&gt;
-&lt;th&gt;US Region&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;0&lt;/th&gt;
-&lt;td&gt;4337954960&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;Turkey&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Baked&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Bread-based&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;None&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Suburban&lt;/td&gt;
-&lt;td&gt;18 - 29&lt;/td&gt;
-&lt;td&gt;Male&lt;/td&gt;
-&lt;td&gt;$75,000 to $99,999&lt;/td&gt;
-&lt;td&gt;Middle Atlantic&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1&lt;/th&gt;
-&lt;td&gt;4337951949&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;Turkey&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Baked&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Bread-based&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Other (please specify)&lt;/td&gt;
-&lt;td&gt;Homemade cranberry gelatin ring&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Rural&lt;/td&gt;
-&lt;td&gt;18 - 29&lt;/td&gt;
-&lt;td&gt;Female&lt;/td&gt;
-&lt;td&gt;$50,000 to $74,999&lt;/td&gt;
-&lt;td&gt;East South Central&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;2&lt;/th&gt;
-&lt;td&gt;4337935621&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;Turkey&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Roasted&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Rice-based&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Homemade&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Suburban&lt;/td&gt;
-&lt;td&gt;18 - 29&lt;/td&gt;
-&lt;td&gt;Male&lt;/td&gt;
-&lt;td&gt;$0 to $9,999&lt;/td&gt;
-&lt;td&gt;Mountain&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3&lt;/th&gt;
-&lt;td&gt;4337933040&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;Turkey&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Baked&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Bread-based&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Homemade&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Urban&lt;/td&gt;
-&lt;td&gt;30 - 44&lt;/td&gt;
-&lt;td&gt;Male&lt;/td&gt;
-&lt;td&gt;$200,000 and up&lt;/td&gt;
-&lt;td&gt;Pacific&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;4&lt;/th&gt;
-&lt;td&gt;4337931983&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;Tofurkey&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Baked&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Bread-based&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Canned&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;NaN&lt;/td&gt;
-&lt;td&gt;Urban&lt;/td&gt;
-&lt;td&gt;30 - 44&lt;/td&gt;
-&lt;td&gt;Male&lt;/td&gt;
-&lt;td&gt;$100,000 to $124,999&lt;/td&gt;
-&lt;td&gt;Pacific&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;5 rows × 65 columns&lt;/p&gt;
-&lt;/div&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;   RespondentID Do you celebrate Thanksgiving?  \
+0    4337954960                            Yes   
+1    4337951949                            Yes   
+2    4337935621                            Yes   
+3    4337933040                            Yes   
+4    4337931983                            Yes   
+
+  What is typically the main dish at your Thanksgiving dinner?  \
+0                                             Turkey             
+1                                             Turkey             
+2                                             Turkey             
+3                                             Turkey             
+4                                           Tofurkey             
+
+  What is typically the main dish at your Thanksgiving dinner? - Other (please specify)  \
+0                                                NaN                                      
+1                                                NaN                                      
+2                                                NaN                                      
+3                                                NaN                                      
+4                                                NaN                                      
+
+  How is the main dish typically cooked?  \
+0                                  Baked   
+1                                  Baked   
+2                                Roasted   
+3                                  Baked   
+4                                  Baked   
+
+  How is the main dish typically cooked? - Other (please specify)  \
+0                                                NaN                
+1                                                NaN                
+2                                                NaN                
+3                                                NaN                
+4                                                NaN                
+
+  What kind of stuffing/dressing do you typically have?  \
+0                                        Bread-based      
+1                                        Bread-based      
+2                                         Rice-based      
+3                                        Bread-based      
+4                                        Bread-based      
+
+  What kind of stuffing/dressing do you typically have? - Other (please specify)  \
+0                                                NaN                               
+1                                                NaN                               
+2                                                NaN                               
+3                                                NaN                               
+4                                                NaN                               
+
+  What type of cranberry saucedo you typically have?  \
+0                                               None   
+1                             Other (please specify)   
+2                                           Homemade   
+3                                           Homemade   
+4                                             Canned   
+
+  What type of cranberry saucedo you typically have? - Other (please specify)  \
+0                                                NaN                            
+1                    Homemade cranberry gelatin ring                            
+2                                                NaN                            
+3                                                NaN                            
+4                                                NaN                            
+
+          ...          \
+0         ...           
+1         ...           
+2         ...           
+3         ...           
+4         ...           
+
+  Have you ever tried to meet up with hometown friends on Thanksgiving night?  \
+0                                                Yes                            
+1                                                 No                            
+2                                                Yes                            
+3                                                Yes                            
+4                                                Yes                            
+
+  Have you ever attended a "Friendsgiving?"  \
+0                                        No   
+1                                        No   
+2                                       Yes   
+3                                        No   
+4                                        No   
+
+  Will you shop any Black Friday sales on Thanksgiving Day?  \
+0                                                 No          
+1                                                Yes          
+2                                                Yes          
+3                                                 No          
+4                                                 No          
+
+  Do you work in retail? Will you employer make you work on Black Friday?  \
+0                     No                                              NaN   
+1                     No                                              NaN   
+2                     No                                              NaN   
+3                     No                                              NaN   
+4                     No                                              NaN   
+
+  How would you describe where you live?      Age What is your gender?  \
+0                               Suburban  18 - 29                 Male   
+1                                  Rural  18 - 29               Female   
+2                               Suburban  18 - 29                 Male   
+3                                  Urban  30 - 44                 Male   
+4                                  Urban  30 - 44                 Male   
+
+  How much total combined money did all members of your HOUSEHOLD earn last year?  \
+0                                 $75,000 to $99,999                                
+1                                 $50,000 to $74,999                                
+2                                       $0 to $9,999                                
+3                                    $200,000 and up                                
+4                               $100,000 to $124,999                                
+
+            US Region  
+0     Middle Atlantic  
+1  East South Central  
+2            Mountain  
+3             Pacific  
+4             Pacific  
+
+[5 rows x 65 columns]
+&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
