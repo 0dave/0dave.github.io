@@ -33,11 +33,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="author" content="David Wang" />
-<meta name="description" content="This post explore the Gun Death report in US, using data from 2013 - 2015." />
+<meta name="description" content="" />
 <meta name="keywords" content="Python third post">
 <meta property="og:site_name" content="Dave's Blog"/>
 <meta property="og:title" content="Gun Death Analysis"/>
-<meta property="og:description" content="This post explore the Gun Death report in US, using data from 2013 - 2015."/>
+<meta property="og:description" content=""/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://0dave.github.io/gundeath.html"/>
 <meta property="og:type" content="article"/>
@@ -133,24 +133,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </header>
   <div>
     
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This post explore the Gun Death report in US, using data from 2013 - 2015.</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'guns.csv'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -171,10 +162,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -196,14 +187,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
 <span class="n">year_counts</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">year_counts</span><span class="p">:</span>
         <span class="n">year_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">year_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">year_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">print</span><span class="p">(</span><span class="n">year_counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">year_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -212,7 +203,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{'2014': 33599, '2013': 33636, '2012': 33563}
+<pre>{'2012': 33563, '2014': 33599, '2013': 33636}
 </pre>
 </div>
 </div>
@@ -224,10 +215,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
     
 <span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">month</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">dates</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dates</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 
 <span class="n">date_counts</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">:</span>
@@ -235,7 +226,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <span class="n">date_counts</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_counts</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">date_counts</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">print</span><span class="p">(</span><span class="n">date_counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">date_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -245,7 +236,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[datetime.datetime(2012, 1, 1, 0, 0), datetime.datetime(2012, 1, 1, 0, 0), datetime.datetime(2012, 1, 1, 0, 0), datetime.datetime(2012, 2, 1, 0, 0), datetime.datetime(2012, 2, 1, 0, 0)]
-{datetime.datetime(2013, 8, 1, 0, 0): 2859, datetime.datetime(2014, 3, 1, 0, 0): 2684, datetime.datetime(2013, 4, 1, 0, 0): 2798, datetime.datetime(2014, 10, 1, 0, 0): 2865, datetime.datetime(2013, 10, 1, 0, 0): 2808, datetime.datetime(2013, 3, 1, 0, 0): 2862, datetime.datetime(2014, 12, 1, 0, 0): 2857, datetime.datetime(2014, 2, 1, 0, 0): 2361, datetime.datetime(2013, 9, 1, 0, 0): 2742, datetime.datetime(2013, 6, 1, 0, 0): 2920, datetime.datetime(2012, 3, 1, 0, 0): 2743, datetime.datetime(2013, 5, 1, 0, 0): 2806, datetime.datetime(2012, 12, 1, 0, 0): 2791, datetime.datetime(2014, 5, 1, 0, 0): 2864, datetime.datetime(2012, 2, 1, 0, 0): 2357, datetime.datetime(2014, 7, 1, 0, 0): 2884, datetime.datetime(2013, 11, 1, 0, 0): 2758, datetime.datetime(2014, 4, 1, 0, 0): 2862, datetime.datetime(2013, 7, 1, 0, 0): 3079, datetime.datetime(2012, 1, 1, 0, 0): 2758, datetime.datetime(2013, 12, 1, 0, 0): 2765, datetime.datetime(2012, 11, 1, 0, 0): 2729, datetime.datetime(2012, 7, 1, 0, 0): 3026, datetime.datetime(2012, 9, 1, 0, 0): 2852, datetime.datetime(2014, 9, 1, 0, 0): 2914, datetime.datetime(2014, 6, 1, 0, 0): 2931, datetime.datetime(2014, 8, 1, 0, 0): 2970, datetime.datetime(2012, 10, 1, 0, 0): 2733, datetime.datetime(2012, 5, 1, 0, 0): 2999, datetime.datetime(2012, 6, 1, 0, 0): 2826, datetime.datetime(2014, 11, 1, 0, 0): 2756, datetime.datetime(2013, 1, 1, 0, 0): 2864, datetime.datetime(2012, 8, 1, 0, 0): 2954, datetime.datetime(2014, 1, 1, 0, 0): 2651, datetime.datetime(2012, 4, 1, 0, 0): 2795, datetime.datetime(2013, 2, 1, 0, 0): 2375}
+{datetime.datetime(2012, 12, 1, 0, 0): 2791, datetime.datetime(2014, 1, 1, 0, 0): 2651, datetime.datetime(2014, 7, 1, 0, 0): 2884, datetime.datetime(2013, 2, 1, 0, 0): 2375, datetime.datetime(2014, 4, 1, 0, 0): 2862, datetime.datetime(2013, 4, 1, 0, 0): 2798, datetime.datetime(2013, 12, 1, 0, 0): 2765, datetime.datetime(2013, 5, 1, 0, 0): 2806, datetime.datetime(2013, 1, 1, 0, 0): 2864, datetime.datetime(2012, 9, 1, 0, 0): 2852, datetime.datetime(2013, 11, 1, 0, 0): 2758, datetime.datetime(2013, 10, 1, 0, 0): 2808, datetime.datetime(2014, 2, 1, 0, 0): 2361, datetime.datetime(2014, 8, 1, 0, 0): 2970, datetime.datetime(2012, 6, 1, 0, 0): 2826, datetime.datetime(2014, 10, 1, 0, 0): 2865, datetime.datetime(2014, 9, 1, 0, 0): 2914, datetime.datetime(2012, 7, 1, 0, 0): 3026, datetime.datetime(2014, 5, 1, 0, 0): 2864, datetime.datetime(2012, 11, 1, 0, 0): 2729, datetime.datetime(2012, 1, 1, 0, 0): 2758, datetime.datetime(2013, 9, 1, 0, 0): 2742, datetime.datetime(2012, 5, 1, 0, 0): 2999, datetime.datetime(2013, 8, 1, 0, 0): 2859, datetime.datetime(2013, 7, 1, 0, 0): 3079, datetime.datetime(2014, 3, 1, 0, 0): 2684, datetime.datetime(2012, 3, 1, 0, 0): 2743, datetime.datetime(2012, 8, 1, 0, 0): 2954, datetime.datetime(2014, 11, 1, 0, 0): 2756, datetime.datetime(2012, 2, 1, 0, 0): 2357, datetime.datetime(2012, 10, 1, 0, 0): 2733, datetime.datetime(2013, 6, 1, 0, 0): 2920, datetime.datetime(2013, 3, 1, 0, 0): 2862, datetime.datetime(2014, 6, 1, 0, 0): 2931, datetime.datetime(2012, 4, 1, 0, 0): 2795, datetime.datetime(2014, 12, 1, 0, 0): 2857}
 </pre>
 </div>
 </div>
@@ -257,7 +248,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">sex_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sex_counts</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="ow">in</span> <span class="n">sex_counts</span><span class="p">:</span>
         <span class="n">sex_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -270,8 +261,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <span class="k">else</span><span class="p">:</span>
         <span class="n">race_counts</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
         
-<span class="k">print</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">race_counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">race_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -281,7 +272,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>{'M': 86349, 'F': 14449}
-{'Native American/Native Alaskan': 917, 'Black': 23296, 'White': 66237, 'Asian/Pacific Islander': 1326, 'Hispanic': 9022}
+{'Native American/Native Alaskan': 917, 'Hispanic': 9022, 'Black': 23296, 'Asian/Pacific Islander': 1326, 'White': 66237}
 </pre>
 </div>
 </div>
@@ -303,9 +294,9 @@ The racial profile of gun vilolence need more examination, for white and black.<
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"census.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"census.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
 <span class="n">census</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">census</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">census</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -326,7 +317,7 @@ The racial profile of gun vilolence need more examination, for white and black.<
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">mapping</span><span class="p">[</span><span class="s1">'Asian/Pacific Islander'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15159516</span> <span class="o">+</span> <span class="mi">674625</span>
 <span class="n">mapping</span><span class="p">[</span><span class="s1">'Native American/Native Alaskan'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3739506</span>
 <span class="n">mapping</span><span class="p">[</span><span class="s1">'Hispanic'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">44618105</span>
@@ -337,7 +328,7 @@ The racial profile of gun vilolence need more examination, for white and black.<
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">race_counts</span><span class="p">:</span>
     <span class="n">race_per_hundredk</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">race_counts</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">/</span> <span class="n">mapping</span><span class="p">[</span><span class="n">r</span><span class="p">])</span><span class="o">*</span> <span class="mi">100000</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">race_per_hundredk</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">race_per_hundredk</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -346,7 +337,7 @@ The racial profile of gun vilolence need more examination, for white and black.<
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{'Native American/Native Alaskan': 0, 'Asian/Pacific Islander': 0, 'White': 0, 'Black': 0, 'Hispanic': 0}
+<pre>{'Native American/Native Alaskan': 24.521955573811088, 'Hispanic': 20.220491210910907, 'Asian/Pacific Islander': 8.374309664161762, 'Black': 57.8773477735196, 'White': 33.56849303419181}
 </pre>
 </div>
 </div>
@@ -355,10 +346,10 @@ The racial profile of gun vilolence need more examination, for white and black.<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">intents</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">intents</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
 <span class="n">races</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
 
 <span class="n">homicide_race_per_hundredk</span> <span class="o">=</span> <span class="p">{}</span>
@@ -371,7 +362,7 @@ The racial profile of gun vilolence need more examination, for white and black.<
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">homicide_race_per_hundredk</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">homicide_race_per_hundredk</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">/</span> <span class="n">mapping</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100000</span>
     
-<span class="k">print</span><span class="p">(</span><span class="n">homicide_race_per_hundredk</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">homicide_race_per_hundredk</span><span class="p">)</span>
     
 </pre></div>
 </div>
@@ -381,19 +372,10 @@ The racial profile of gun vilolence need more examination, for white and black.<
 <div class="output">
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{'Native American/Native Alaskan': 0, 'Black': 0, 'White': 0, 'Asian/Pacific Islander': 0, 'Hispanic': 0}
+<pre>{'Hispanic': 12.627161104219914, 'Black': 48.471284987180944, 'White': 4.6356417981453335, 'Asian/Pacific Islander': 3.530346230970155, 'Native American/Native Alaskan': 8.717729026240365}
 </pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Thoughts and to be cont.</p>
 </div>
 </div>
 </div>
@@ -402,7 +384,7 @@ The racial profile of gun vilolence need more examination, for white and black.<
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
