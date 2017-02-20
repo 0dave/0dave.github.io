@@ -1,0 +1,2449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet/less" type="text/css" href="https://0dave.github.io/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://0dave.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://0dave.github.io/theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="https://0dave.github.io/static/custom.css" rel="stylesheet">
+
+    <link href="https://0dave.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Dave's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="David Wang" />
+<meta name="description" content="To read the data into a pandas Dataframe. We need to specify an encoding because the dataset has some characters that aren't in the Python default utf-8 encoding." />
+<meta name="keywords" content="Python seventh post">
+<meta property="og:site_name" content="Dave's Blog"/>
+<meta property="og:title" content="About Star Wars Survey Analysis"/>
+<meta property="og:description" content="To read the data into a pandas Dataframe. We need to specify an encoding because the dataset has some characters that aren't in the Python default utf-8 encoding."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://0dave.github.io/Survey.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-02-19 20:00:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://0dave.github.io/author/david-wang.html">
+<meta property="article:section" content="posts"/>
+<meta property="article:tag" content="Python seventh post"/>
+<meta property="og:image" content="//i0.wp.com/www.davidshwang.com/wp-content/uploads/2017/01/profile.jpg?resize=300%2C300">
+
+  <title>Dave's Blog &ndash; About Star Wars Survey Analysis</title>
+</head>
+<body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-ABCDEF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-ABCDEF');</script>
+<!-- End Google Tag Manager -->  <aside>
+    <div>
+      <a href="https://0dave.github.io">
+        <img src="//i0.wp.com/www.davidshwang.com/wp-content/uploads/2017/01/profile.jpg?resize=300%2C300" alt="David Sh Wang" title="David Sh Wang">
+      </a>
+      <h1><a href="https://0dave.github.io">David Sh Wang</a></h1>
+
+<p>Data Scientist • Business Intelligence Developer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://0dave.github.io/pages/about.html#about">About</a></li>
+          <li><a href="https://0dave.github.io/pages/contact.html#contact">Contact</a></li>
+
+          <li><a href="http://davidshwang.com" target="_blank">Portfolio</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/shwangdavid" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/0dave" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/daveshwang" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-google" href="https://google.com/+davidwangsh" target="_blank"><i class="fa fa-google"></i></a></li>
+        <li><a class="sc-rss" href="//blog" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- GF - Aside -->
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:250px;height:250px"
+           data-ad-client="<< YOUR AD CLIENT>>"
+           data-ad-slot="<< AD-SLOT FOR THE 250X250 BANNER >>"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+  </aside>
+  <main>
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="<< YOUR AD CLIENT>>"
+           data-ad-slot="<< AD-SLOT FOR THE RESPONSIBLE BANNER >>"
+           data-ad-format="auto"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    <nav>
+      <a href="https://0dave.github.io">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://0dave.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+
+    <h1 id="Survey">About Star Wars Survey Analysis</h1>
+    <p>
+          Posted on February 19, 2017 in <a href="https://0dave.github.io/category/posts.html">posts</a>
+
+
+    </p>
+  </header>
+  <div>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To read the data into a pandas Dataframe. We need to specify an encoding because the dataset has some characters that aren't in the Python default utf-8 encoding.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">star_wars</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"star_wars.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"ISO-8859-1"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Explore data by using and look for any strange values in the columns and rows.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>RespondentID</th>
+<th>Have you seen any of the 6 films in the Star Wars franchise?</th>
+<th>Do you consider yourself to be a fan of the Star Wars film franchise?</th>
+<th>Which of the following Star Wars films have you seen? Please select all that apply.</th>
+<th>Unnamed: 4</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.</th>
+<th>...</th>
+<th>Unnamed: 28</th>
+<th>Which character shot first?</th>
+<th>Are you familiar with the Expanded Universe?</th>
+<th>Do you consider yourself to be a fan of the Expanded Universe?ÂÃ¦</th>
+<th>Do you consider yourself to be a fan of the Star Trek franchise?</th>
+<th>Gender</th>
+<th>Age</th>
+<th>Household Income</th>
+<th>Education</th>
+<th>Location (Census Region)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>NaN</td>
+<td>Response</td>
+<td>Response</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>...</td>
+<td>Yoda</td>
+<td>Response</td>
+<td>Response</td>
+<td>Response</td>
+<td>Response</td>
+<td>Response</td>
+<td>Response</td>
+<td>Response</td>
+<td>Response</td>
+<td>Response</td>
+</tr>
+<tr>
+<th>1</th>
+<td>3.292880e+09</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>3</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>NaN</td>
+<td>High school degree</td>
+<td>South Atlantic</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3.292880e+09</td>
+<td>No</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>Bachelor degree</td>
+<td>West South Central</td>
+</tr>
+<tr>
+<th>3</th>
+<td>3.292765e+09</td>
+<td>Yes</td>
+<td>No</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1</td>
+<td>...</td>
+<td>Unfamiliar (N/A)</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>High school degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3.292763e+09</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>5</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>5</th>
+<td>3.292731e+09</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>5</td>
+<td>...</td>
+<td>Somewhat favorably</td>
+<td>Greedo</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>6</th>
+<td>3.292719e+09</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>1</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>Han</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$25,000 - $49,999</td>
+<td>Bachelor degree</td>
+<td>Middle Atlantic</td>
+</tr>
+<tr>
+<th>7</th>
+<td>3.292685e+09</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>6</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>Han</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>NaN</td>
+<td>High school degree</td>
+<td>East North Central</td>
+</tr>
+<tr>
+<th>8</th>
+<td>3.292664e+09</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>4</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>Han</td>
+<td>No</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>NaN</td>
+<td>High school degree</td>
+<td>South Atlantic</td>
+</tr>
+<tr>
+<th>9</th>
+<td>3.292654e+09</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>5</td>
+<td>...</td>
+<td>Somewhat favorably</td>
+<td>Han</td>
+<td>No</td>
+<td>NaN</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>Some college or Associate degree</td>
+<td>South Atlantic</td>
+</tr>
+</tbody>
+</table>
+<p>10 rows × 38 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Show the column names of dataframe</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Index(['RespondentID',
+       'Have you seen any of the 6 films in the Star Wars franchise?',
+       'Do you consider yourself to be a fan of the Star Wars film franchise?',
+       'Which of the following Star Wars films have you seen? Please select all that apply.',
+       'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8',
+       'Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.',
+       'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13',
+       'Unnamed: 14',
+       'Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her.',
+       'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19',
+       'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23',
+       'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27',
+       'Unnamed: 28', 'Which character shot first?',
+       'Are you familiar with the Expanded Universe?',
+       'Do you consider yourself to be a fan of the Expanded Universe?ÂÃ¦',
+       'Do you consider yourself to be a fan of the Star Trek franchise?',
+       'Gender', 'Age', 'Household Income', 'Education',
+       'Location (Census Region)'],
+      dtype='object')
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Remove any rows where <font color="red">RespondentID</font> is <font color="red">**NaN**</font>. And make star_wars should only consist of rows where <font color="red">RespondentID</font> is not <font color="red">NaN</font>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">star_wars</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">star_wars</span> <span class="o">=</span> <span class="n">star_wars</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">star_wars</span><span class="p">[</span><span class="s2">"RespondentID"</span><span class="p">])]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">star_wars</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(1187, 38)
+(1186, 38)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cleaning-Up-Yes/No-Columns">Cleaning Up Yes/No Columns<a class="anchor-link" href="#Cleaning-Up-Yes/No-Columns">¶</a></h3><p>Check column if that they are both Yes/No questions. There's another possible value they can take on, NaN, when a respondent chose not to answer that question.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span><span class="p">[</span><span class="s2">"Have you seen any of the 6 films in the Star Wars franchise?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Yes    936
+No     250
+Name: Have you seen any of the 6 films in the Star Wars franchise?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span><span class="p">[</span><span class="s2">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Yes    552
+No     284
+Name: Do you consider yourself to be a fan of the Star Wars film franchise?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now convert both the <font color="red">*Have you seen any of the 6 films in the Star Wars franchise?*</font> and <font color="red">*Do you consider yourself to be a fan of the Star Wars film franchise?*</font> columns to the Boolean type.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">yes_no</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Yes'</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'No'</span><span class="p">:</span><span class="kc">False</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"Have you seen any of the 6 films in the Star Wars franchise?"</span><span class="p">,</span>
+            <span class="s2">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span>
+           <span class="p">]:</span>
+    <span class="n">star_wars</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">=</span><span class="n">star_wars</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">yes_no</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>RespondentID</th>
+<th>Have you seen any of the 6 films in the Star Wars franchise?</th>
+<th>Do you consider yourself to be a fan of the Star Wars film franchise?</th>
+<th>Which of the following Star Wars films have you seen? Please select all that apply.</th>
+<th>Unnamed: 4</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.</th>
+<th>...</th>
+<th>Unnamed: 28</th>
+<th>Which character shot first?</th>
+<th>Are you familiar with the Expanded Universe?</th>
+<th>Do you consider yourself to be a fan of the Expanded Universe?ÂÃ¦</th>
+<th>Do you consider yourself to be a fan of the Star Trek franchise?</th>
+<th>Gender</th>
+<th>Age</th>
+<th>Household Income</th>
+<th>Education</th>
+<th>Location (Census Region)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<td>3.292880e+09</td>
+<td>True</td>
+<td>True</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>3</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>NaN</td>
+<td>High school degree</td>
+<td>South Atlantic</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3.292880e+09</td>
+<td>False</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>Bachelor degree</td>
+<td>West South Central</td>
+</tr>
+<tr>
+<th>3</th>
+<td>3.292765e+09</td>
+<td>True</td>
+<td>False</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1</td>
+<td>...</td>
+<td>Unfamiliar (N/A)</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>High school degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3.292763e+09</td>
+<td>True</td>
+<td>True</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>5</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>5</th>
+<td>3.292731e+09</td>
+<td>True</td>
+<td>True</td>
+<td>Star Wars: Episode I  The Phantom Menace</td>
+<td>Star Wars: Episode II  Attack of the Clones</td>
+<td>Star Wars: Episode III  Revenge of the Sith</td>
+<td>Star Wars: Episode IV  A New Hope</td>
+<td>Star Wars: Episode V The Empire Strikes Back</td>
+<td>Star Wars: Episode VI Return of the Jedi</td>
+<td>5</td>
+<td>...</td>
+<td>Somewhat favorably</td>
+<td>Greedo</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now both columns should have only True, False, or NaN values in them.Convert the  column to the Boolean type.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cleaning-Up-Checkbox-Columns-Columns">Cleaning Up Checkbox Columns Columns<a class="anchor-link" href="#Cleaning-Up-Checkbox-Columns-Columns">¶</a></h3><p>There are 6 columns represent a checkbox question. The respondent was asked Which of the following Star Wars films have you seen? Please select all that apply., and then was able to check off a series of boxes indicating which movies they saw.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">movie_mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Star Wars: Episode I  The Phantom Menace"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"Star Wars: Episode II  Attack of the Clones"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"Star Wars: Episode III  Revenge of the Sith"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"Star Wars: Episode IV  A New Hope"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"Star Wars: Episode V The Empire Strikes Back"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"Star Wars: Episode VI Return of the Jedi"</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">]:</span>
+    <span class="n">star_wars</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">star_wars</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">movie_mapping</span><span class="p">)</span>
+<span class="n">star_wars</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>RespondentID</th>
+<th>Have you seen any of the 6 films in the Star Wars franchise?</th>
+<th>Do you consider yourself to be a fan of the Star Wars film franchise?</th>
+<th>Which of the following Star Wars films have you seen? Please select all that apply.</th>
+<th>Unnamed: 4</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.</th>
+<th>...</th>
+<th>Unnamed: 28</th>
+<th>Which character shot first?</th>
+<th>Are you familiar with the Expanded Universe?</th>
+<th>Do you consider yourself to be a fan of the Expanded Universe?ÂÃ¦</th>
+<th>Do you consider yourself to be a fan of the Star Trek franchise?</th>
+<th>Gender</th>
+<th>Age</th>
+<th>Household Income</th>
+<th>Education</th>
+<th>Location (Census Region)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<td>3.292880e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>3</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>NaN</td>
+<td>High school degree</td>
+<td>South Atlantic</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3.292880e+09</td>
+<td>False</td>
+<td>NaN</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>Bachelor degree</td>
+<td>West South Central</td>
+</tr>
+<tr>
+<th>3</th>
+<td>3.292765e+09</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>1</td>
+<td>...</td>
+<td>Unfamiliar (N/A)</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>High school degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3.292763e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>5</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>5</th>
+<td>3.292731e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>5</td>
+<td>...</td>
+<td>Somewhat favorably</td>
+<td>Greedo</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In order to better read the data, rename the columns to better reflect what the values represent</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span> <span class="o">=</span> <span class="n">star_wars</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Which of the following Star Wars films have you seen? Please select all that apply."</span><span class="p">:</span> <span class="s2">"seen_1"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 4"</span><span class="p">:</span><span class="s2">"seen_2"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 5"</span><span class="p">:</span><span class="s2">"seen_3"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 6"</span><span class="p">:</span><span class="s2">"seen_4"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 7"</span><span class="p">:</span><span class="s2">"seen_5"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 8"</span><span class="p">:</span><span class="s2">"seen_6"</span>
+<span class="p">})</span>
+<span class="n">star_wars</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>RespondentID</th>
+<th>Have you seen any of the 6 films in the Star Wars franchise?</th>
+<th>Do you consider yourself to be a fan of the Star Wars film franchise?</th>
+<th>seen_1</th>
+<th>seen_2</th>
+<th>seen_3</th>
+<th>seen_4</th>
+<th>seen_5</th>
+<th>seen_6</th>
+<th>Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.</th>
+<th>...</th>
+<th>Unnamed: 28</th>
+<th>Which character shot first?</th>
+<th>Are you familiar with the Expanded Universe?</th>
+<th>Do you consider yourself to be a fan of the Expanded Universe?ÂÃ¦</th>
+<th>Do you consider yourself to be a fan of the Star Trek franchise?</th>
+<th>Gender</th>
+<th>Age</th>
+<th>Household Income</th>
+<th>Education</th>
+<th>Location (Census Region)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<td>3.292880e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>3</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>NaN</td>
+<td>High school degree</td>
+<td>South Atlantic</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3.292880e+09</td>
+<td>False</td>
+<td>NaN</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>Bachelor degree</td>
+<td>West South Central</td>
+</tr>
+<tr>
+<th>3</th>
+<td>3.292765e+09</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>1</td>
+<td>...</td>
+<td>Unfamiliar (N/A)</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>High school degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3.292763e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>5</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>5</th>
+<td>3.292731e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>5</td>
+<td>...</td>
+<td>Somewhat favorably</td>
+<td>Greedo</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cleaning-Up-Ranking-Columns">Cleaning Up Ranking Columns<a class="anchor-link" href="#Cleaning-Up-Ranking-Columns">¶</a></h3><p>Convert each column to a numeric type, then rename the columns so you can tell what they're for more easily</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">]]</span> <span class="o">=</span> <span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span> <span class="o">=</span> <span class="n">star_wars</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film."</span><span class="p">:</span><span class="s2">"ranking_1"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 10"</span><span class="p">:</span><span class="s2">"ranking_2"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 11"</span><span class="p">:</span><span class="s2">"ranking_3"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 12"</span><span class="p">:</span><span class="s2">"ranking_4"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 13"</span><span class="p">:</span><span class="s2">"ranking_5"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 14"</span><span class="p">:</span><span class="s2">"ranking_6"</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">star_wars</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>RespondentID</th>
+<th>Have you seen any of the 6 films in the Star Wars franchise?</th>
+<th>Do you consider yourself to be a fan of the Star Wars film franchise?</th>
+<th>seen_1</th>
+<th>seen_2</th>
+<th>seen_3</th>
+<th>seen_4</th>
+<th>seen_5</th>
+<th>seen_6</th>
+<th>ranking_1</th>
+<th>...</th>
+<th>Unnamed: 28</th>
+<th>Which character shot first?</th>
+<th>Are you familiar with the Expanded Universe?</th>
+<th>Do you consider yourself to be a fan of the Expanded Universe?ÂÃ¦</th>
+<th>Do you consider yourself to be a fan of the Star Trek franchise?</th>
+<th>Gender</th>
+<th>Age</th>
+<th>Household Income</th>
+<th>Education</th>
+<th>Location (Census Region)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<td>3.292880e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>3.0</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>NaN</td>
+<td>High school degree</td>
+<td>South Atlantic</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3.292880e+09</td>
+<td>False</td>
+<td>NaN</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>Bachelor degree</td>
+<td>West South Central</td>
+</tr>
+<tr>
+<th>3</th>
+<td>3.292765e+09</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>1.0</td>
+<td>...</td>
+<td>Unfamiliar (N/A)</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$0 - $24,999</td>
+<td>High school degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3.292763e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>5.0</td>
+<td>...</td>
+<td>Very favorably</td>
+<td>I don't understand this question</td>
+<td>No</td>
+<td>NaN</td>
+<td>Yes</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+<tr>
+<th>5</th>
+<td>3.292731e+09</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>5.0</td>
+<td>...</td>
+<td>Somewhat favorably</td>
+<td>Greedo</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Male</td>
+<td>18-29</td>
+<td>$100,000 - $149,999</td>
+<td>Some college or Associate degree</td>
+<td>West North Central</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Finding-The-Highest-Ranked-Movie">Finding The Highest Ranked Movie<a class="anchor-link" href="#Finding-The-Highest-Ranked-Movie">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>ranking_1    3.732934
+ranking_2    4.087321
+ranking_3    4.341317
+ranking_4    3.272727
+ranking_5    2.513158
+ranking_6    3.047847
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><matplotlib.axes._subplots.axessubplot at 0x7f61c79ef7f0></pre>
+</div>
+</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAAEECAYAAAA4Qc+SAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAALEgAACxIB0t1+/AAAGrRJREFUeJzt3X1sU/fd9/GPSYowSQPJFcehFWo3p+0yRqNBRB/Y6q4h
+0C5idgIodFHbiUmsgzZ3C1UG0QBRWEFIBa3qEHenPii7K7i5NEjLmBSupYtZxUbUFMiqtptohyIe
+nIfZ6eIwGhL7/oM7EV5IfBycxP71/frL55zf+fn7laNPTk58zrFFIpGIAAApb8pkFwAASAwCHQAM
+QaADgCEIdAAwBIEOAIYg0AHAEJYDPRwOq7y8XE8//fSwbc3NzSouLlZ5ebnKy8u1d+/ehBYJAIgt
+3erAuro6uVwuhUKhG24vLi7Wvn37ElYYACA+lo7Q/X6/fD6fVqxYMd71AADGyFKgv/TSS6qpqZHN
+ZhtxzKlTp+TxeLR69WqdPXs2YQUCAKyJGehNTU3Kzc1VYWGhRrpLwJw5c9TU1KR33nlHVVVVWrt2
+bcILBQCMzhbrXi67d+/Wu+++q7S0NH355Zfq7e1VaWmpdu3aNeI+jzzyiA4dOqSZM2eOOKa/f0Dp
+6WljrxwAECVmoF+vublZb7zxxrB/fnZ1dSk3N1eS1Nraqueee07vvffeqHN1dvaMoVwA+GpzOG4d
+cZvlb7n8pwMHDshms6myslINDQ3av3+/0tPTNW3aNO3Zs2es0wIAxiiuI/RE4ggdAOI32hE6V4oC
+gCEIdAAwBIEOAIYY8z9FgesNDAzo3LnPJ7uMuN1559eVlsbXZ2EGAh0Jce7c5/qfn29QfmbmZJdi
+mT8UUun2nXK57prsUoCEINCRMPmZmbo9a8ZklwF8ZXEOHQAMQaADgCEIdAAwBIEOAIYg0AHAEAQ6
+ABiCQAcAQxDoAGAIAh0ADMGVohMoFe93wr1OgNRhOdDD4bCWLVsmp9M57BF0krR9+3YdP35cdrtd
+O3fuVGFhYUILNcG5c59r03+/qMzcrMkuxZJQ17+0bcVm7nUCpAjLgV5XVyeXy6VQKDRsm8/nU1tb
+m44dO6YzZ85oy5YtOnjwYEILNUVmbpZm5GdPdhkADGTpHLrf75fP59OKFStuuL2xsVFer1eSVFRU
+pJ6eHnV1dSWuSgBATJYC/aWXXlJNTY1sNtsNt3d0dCg/P39o2el0qr29PTEVAgAsiXnKpampSbm5
+uSosLNTJkycT9sbZ2dOVnv7V+mdbMJg69woflJOTOepDaQelYm+S9f6AVBAz0D/88EO999578vl8
++vLLL9Xb26uamhrt2rVraExeXp78fv/Qst/vl9PpHHXeYPDyTZSdmgKB4f9/SHaBQEidnT2WxqUi
+q/0ByWK0A5CYp1zWrVunpqYmNTY2avfu3brvvvuiwlySSkpKVF9fL0k6ffq0srKylJube5NlAwDi
+MebvoR84cEA2m02VlZVyu93y+XwqLS2V3W7Xjh07ElkjAMCCuAJ9wYIFWrBggSRp5cqVUds2b96c
+uKoAAHHj0n8AMASBDgCGINABwBAEOgAYgkAHAEMQ6ABgCAIdAAxBoAOAIZLqiUU80QcAxi6pAv3c
+uc+18eX/q4wZjskuxZLeLzq1Y30lT/QBkBSSKtAlKWOGQ1k5sya7DABIOZxDBwBDEOgAYAgCHQAM
+QaADgCEIdAAwRMxvufT19amqqkpXr17V1atXVVJSonXr1kWNaW5u1po1azR79mxJUmlpqdasWTM+
+FQMAbihmoE+dOlV1dXWy2+0aGBjQ448/rpaWFs2fPz9qXHFxsfbt2zduhQIARmfplIvdbpd07Wg9
+HA5rxowZ41oUACB+lgI9HA7L6/Vq4cKFWrBggQoKCoaNOXXqlDwej1avXq2zZ88mvFAAwOgsXSk6
+ZcoU1dfXKxQKadWqVWpubh56WLQkzZkzR01NTbLb7fL5fFq7dq0aGhpGnTM7e7rS06PvgRIMZo6h
+hcmVk5Mph+NWS2NN7i8Ve5Pi+/yAZBfXpf+ZmZlyu9366KOPogI9IyNj6LXb7dbWrVvV3d2tmTNn
+jjhXMHh52LpAIBRPOUkhEAips7PH8thUY7W/VOxNiu/zA5LBaAcgMU+5BAIB9fRc+4G/cuWKTpw4
+ocLCwqgxXV1dQ69bW1sladQwBwAkXswj9M7OTm3YsEGRSEThcFgej0cPPPCADhw4IJvNpsrKSjU0
+NGj//v1KT0/XtGnTtGfPnomoHQBwnZiBfs899+jw4cPD1q9cuXLodVVVlaqqqhJbGQAgLlwpCgCG
+INABwBAEOgAYgkAHAEMQ6ABgCAIdAAyRdA+JBpLRwMCAzp37fLLLiNudd35daWlpsQfCCAQ6YMG5
+c5/rf//yt8qekTfZpVgW/KJDP/lfy+Ry3TXZpWCCEOiARdkz8pT7X7dNdhnAiDiHDgCGINABwBAE
+OgAYgkAHAEMQ6ABgCAIdAAxBoAOAIWJ+D72vr09VVVW6evWqrl69qpKSEq1bt27YuO3bt+v48eOy
+2+3auXPnsMfUAQDGV8xAnzp1qurq6mS32zUwMKDHH39cLS0tmj9//tAYn8+ntrY2HTt2TGfOnNGW
+LVt08ODBcS0cAKxKxVs3jOW2DZauFLXb7ZKuHa2Hw2HNmDEjantjY6O8Xq8kqaioSD09Perq6lJu
+bm5cxQDAeDh37nPt+n2jZjhnTXYplnzRfkk131fct22wFOjhcFgVFRVqa2vTypUrVVBQELW9o6ND
++fn5Q8tOp1Pt7e0EOoCkMcM5S9m3zZ7sMsaVpUCfMmWK6uvrFQqFtGrVKjU3N2vBggU39cbZ2dOV
+nh7950QwmHlTc06GnJxMORy3Whprcn+p2JtEf18Vqfj5jeWzi+vmXJmZmXK73froo4+iAj0vL09+
+v39o2e/3y+l0jjpXMHh52LpAIBRPOUkhEAips7PH8thUY7W/VOxNor+vilT8/Eb67EYL+ZhfWwwE
+AurpuTbplStXdOLEiWHfYCkpKVF9fb0k6fTp08rKyuJ0CwBMsJhH6J2dndqwYYMikYjC4bA8Ho8e
+eOABHThwQDabTZWVlXK73fL5fCotLZXdbteOHTsmonYAwHViBvo999yjw4cPD1u/cuXKqOXNmzcn
+rioAQNy4UhQADEGgA4AhCHQAMASBDgCGINABwBAEOgAYgkAHAEMQ6ABgCAIdAAxBoAOAIQh0ADAE
+gQ4AhiDQAcAQBDoAGIJABwBDxLwfut/vV01Njf75z39qypQpWrFihZ588smoMc3NzVqzZo1mz772
+ANbS0lKtWbNmfCoGANxQzEBPS0vTxo0bVVhYqN7eXlVUVGjhwoVyuVxR44qLi7Vv375xKxQAMLqY
+p1wcDsfQM0QzMjLkcrnU0dEx7oUBAOIT8wj9eufPn9enn36qe++9d9i2U6dOyePxyOl0qqamRgUF
+BQkrEsD4GhgY0Llzn092GXG7886vKy0tbbLLSBqWA723t1fV1dWqra1VRkZG1LY5c+aoqalJdrtd
+Pp9Pa9euVUNDQ8KLBTA+zp37XO8f261ZzuzJLsWyS+1BafE6uVx3TXYpScNSoPf396u6uloej0eL
+Fi0atv36gHe73dq6dau6u7s1c+bMEefMzp6u9PTo36zBYKbVupNGTk6mHI5bLY01ub9U7E2iv0HB
+YKZmObM1+/b/moCqEsfkzy+ebBlkKdBra2tVUFCgp5566obbu7q6lJubK0lqbW2VpFHDXJKCwcvD
+1gUCISvlJJVAIKTOzh7LY1ON1f5SsTeJ/q4fl4pM7m+k3kYL+ZiB3tLSoiNHjujuu++W1+uVzWbT
+888/r4sXL8pms6myslINDQ3av3+/0tPTNW3aNO3Zs+fmOgEAxC1moM+fP1+ffPLJqGOqqqpUVVWV
+sKIAAPHjSlEAMASBDgCGINABwBAEOgAYgkAHAEMQ6ABgCAIdAAxBoAOAIQh0ADAEgQ4AhiDQAcAQ
+BDoAGIJABwBDEOgAYAgCHQAMQaADgCFiBrrf79eTTz6psrIyLV26VHV1dTcct337di1evFgejyfm
+AzEAAIkX84lFaWlp2rhxowoLC9Xb26uKigotXLhQLpdraIzP51NbW5uOHTumM2fOaMuWLTp48OC4
+Fg4AiBbzCN3hcKiwsFCSlJGRIZfLpY6OjqgxjY2N8nq9kqSioiL19PSoq6trHMoFAIwkrnPo58+f
+16effqp77703an1HR4fy8/OHlp1Op9rb2xNTIQDAEsuB3tvbq+rqatXW1iojI2M8awIAjEHMc+iS
+1N/fr+rqank8Hi1atGjY9ry8PPn9/qFlv98vp9M56pzZ2dOVnp4WtS4YzLRSTlLJycmUw3GrpbEm
+95eKvUn0NygYzNRnE1BPopn8+cWTLYMsBXptba0KCgr01FNP3XB7SUmJ3n77bX3/+9/X6dOnlZWV
+pdzc3FHnDAYvD1sXCISslJNUAoGQOjt7LI9NNVb7S8XeJPq7flwqMrm/kXobLeRjBnpLS4uOHDmi
+u+++W16vVzabTc8//7wuXrwom82myspKud1u+Xw+lZaWym63a8eOHTfXCQAgbjEDff78+Za+V755
+8+aEFAQAGBuuFAUAQxDoAGAIAh0ADEGgA4AhCHQAMASBDgCGINABwBAEOgAYgkAHAEMQ6ABgCAId
+AAxBoAOAIQh0ADAEgQ4AhiDQAcAQBDoAGCJmoNfW1urBBx/U0qVLb7i9ublZxcXFKi8vV3l5ufbu
+3ZvwIgEAscV8YlFFRYWeeOIJ1dTUjDimuLhY+/btS2hhAID4xDxCLy4uVlZW1kTUAgC4CQk5h37q
+1Cl5PB6tXr1aZ8+eTcSUAIA4xTzlEsucOXPU1NQku90un8+ntWvXqqGhIeZ+2dnTlZ6eFrUuGMy8
+2XImXE5OphyOWy2NNbm/VOxNor9BwWCmPpuAehLN5M8vnmwZdNOBnpGRMfTa7XZr69at6u7u1syZ
+M0fdLxi8PGxdIBC62XImXCAQUmdnj+WxqcZqf6nYm0R/149LRSb3N1Jvo4W8pVMukUhkxG1dXV1D
+r1tbWyUpZpgDABIv5hH6+vXrdfLkSXV3d+vhhx/Ws88+q6tXr8pms6myslINDQ3av3+/0tPTNW3a
+NO3Zs2ci6gYA/IeYgf7yyy+Pur2qqkpVVVUJKwgAMDZcKQoAhiDQAcAQBDoAGIJABwBDEOgAYAgC
+HQAMQaADgCEIdAAwBIEOAIYg0AHAEAQ6ABiCQAcAQxDoAGAIAh0ADEGgA4AhCHQAMETMQK+trdWD
+Dz6opUuXjjhm+/btWrx4sTwejz755JOEFggAsCZmoFdUVOj1118fcbvP51NbW5uOHTumF198UVu2
+bElogQAAa2IGenFxsbKyskbc3tjYKK/XK0kqKipST09P1IOjAQAT46bPoXd0dCg/P39o2el0qr29
+/WanBQDEKeZDosdLdvZ0paenRa0LBjMnqZqxy8nJlMNxq6WxJveXir1J9DcoGMzUZxNQT6KZ/PnF
+ky2DbjrQ8/Ly5Pf7h5b9fr+cTmfM/YLBy8PWBQKhmy1nwgUCIXV29lgem2qs9peKvUn0d/24VGRy
+fyP1NlrIWzrlEolERtxWUlKi+vp6SdLp06eVlZWl3NxcK9MCABIo5hH6+vXrdfLkSXV3d+vhhx/W
+s88+q6tXr8pms6myslJut1s+n0+lpaWy2+3asWPHRNQNAPgPMQP95ZdfjjnJ5s2bE1IMAGDsuFIU
+AAxBoAOAIQh0ADAEgQ4AhiDQAcAQBDoAGIJABwBDEOgAYAgCHQAMQaADgCEIdAAwBIEOAIYg0AHA
+EAQ6ABiCQAcAQxDoAGAIS4F+/PhxPfroo1qyZIlee+21Ydubm5tVXFys8vJylZeXa+/evQkvFAAw
+uphPLAqHw9q2bZveeust5eXlafny5SopKZHL5YoaV1xcrH379o1boQCA0cU8Qm9tbdUdd9yh22+/
+XbfccovKysrU2Ng4EbUBAOIQM9Db29s1a9asoWWn06mOjo5h406dOiWPx6PVq1fr7Nmzia0SABBT
+zFMuVsyZM0dNTU2y2+3y+Xxau3atGhoaRt0nO3u60tPTotYFg5mJKGdC5eRkyuG41dJYk/tLxd4k
++hsUDGbqswmoJ9FM/vziyZZBMQPd6XTq4sWLQ8vt7e3Ky8uLGpORkTH02u12a+vWreru7tbMmTNH
+nDcYvDxsXSAQslR0MgkEQurs7LE8NtVY7S8Ve5Po7/pxqcjk/kbqbbSQj3nKZe7cuWpra9OFCxfU
+19eno0ePqqSkJGpMV1fX0OvW1lZJGjXMAQCJF/MIPS0tTZs2bdKqVasUiUS0fPlyuVwuHThwQDab
+TZWVlWpoaND+/fuVnp6uadOmac+ePRNROwDgOpbOoT/00EN66KGHotatXLly6HVVVZWqqqoSWxkA
+IC5cKQoAhiDQAcAQBDoAGIJABwBDEOgAYAgCHQAMQaADgCEIdAAwBIEOAIYg0AHAEAQ6ABiCQAcA
+QxDoAGAIAh0ADEGgA4AhLAX68ePH9eijj2rJkiV67bXXbjhm+/btWrx4sTwejz755JOEFgkAiC1m
+oIfDYW3btk2vv/66fve73+no0aP67LPox8n6fD61tbXp2LFjevHFF7Vly5ZxKxgAcGMxA721tVV3
+3HGHbr/9dt1yyy0qKytTY2Nj1JjGxkZ5vV5JUlFRkXp6eqKeMwoAGH8xA729vV2zZs0aWnY6nero
+6Iga09HRofz8/Kgx7e3tCSwTABCLpWeKTqTeLzonuwTLxlJrqOtf41DJ+Ii3Vn8oNE6VjA9/KKS5
+cYwPftERe1ASibfeS+3BcapkfFxqD8oVx/gv2i+NWy2Jdq3Wb8a9X8xAdzqdunjx4tBye3u78vLy
+osbk5eXJ7/cPLfv9fjmdzlHndThuvcG6efrjf8+LWXSqcjjm6X/ur5/sMsaFwzFP9//h2GSXMW4c
+jnm6/36zfzbvv///THYZ48bhmKdDBn9+g2Kecpk7d67a2tp04cIF9fX16ejRoyopKYkaU1JSovr6
+a0F1+vRpZWVlKTc3d3wqBgDcUMwj9LS0NG3atEmrVq1SJBLR8uXL5XK5dODAAdlsNlVWVsrtdsvn
+86m0tFR2u107duyYiNoBANexRSKRyGQXAQC4eVwpCgCGINABwBAEOgAYgkAHAEMYE+ivvvqq3nzz
+zWHrX3nlFf35z39O6HvV1tbqwQcf1NKlSxM672gmqj+/368nn3xSZWVlWrp0qerq6hI292gmqr++
+vj6tWLFCXq9XZWVl2r17d8LmHs1E/nxK1+7BVF5erqeffjrhc/+nieztkUce0Q9+8AN5vV4tX748
+oXOPZCL76+npUXV1tR577DGVlZXpzJkzce2fdFeKDopEIrLZbDc9T3V1dQKqiVZRUaEnnnhCNTU1
+Y54jWftLS0vTxo0bVVhYqN7eXlVUVGjhwoVyueK5Ji95+5s6darq6upkt9s1MDCgxx9/XC0tLZo/
+f35c8yRrf4Pq6urkcrkUGsPVu8ncm81m029+8xvNmDFjzHMkc3+/+MUv5Ha79corr6i/v19XrlyJ
+a/+kCfQLFy7oxz/+sYqKivTxxx9r7ty5+tvf/qa+vj4tWbJEzzzzjKRrv6HLy8v1xz/+Uf39/frl
+L3+pr33ta1FzHTx4UH/4wx/06quvasuWLfre976nxYsXj7hvIBDQCy+8oM7OThUVFenEiRM6dOiQ
+Zs6cecNai4uLdeHCBSP7czgccjgckqSMjAy5XC51dHTEDPRU6U+S7Ha7pGtH6+Fw2FI4pFJ/fr9f
+Pp9PTz/99A2PLFO5t0gkonA4HLOnVOwvFArpgw8+0M6dOyVJ6enpyszMjKvXpDrl0tbWpqqqKh05
+ckQbNmzQb3/7W73zzjs6efKk/v73vw+Ny8nJ0aFDh7Ry5Uq98cYbQ+sjkYjefvtt+Xw+7d27V1On
+Th32Hjfa91e/+pXuv/9+HTlyREuWLNGlS+Nzz4dU6+/8+fP69NNPde+99xrVXzgcltfr1cKFC7Vg
+wQIVFBQY1d9LL72kmpqauI5CU6U3m82mVatWadmyZTp48KBR/Z0/f17Z2dnauHGjysvLtWnTpriP
+0JMq0G+77bah8Dh69KgqKirk9Xr12Wef6ezZs0PjSktLJUnf+ta3oo6U6+vr9ac//UmvvPKK0tNv
+/MfHjfZtaWlRWVmZJOm73/2usrKyEt+cUqu/3t5eVVdXq7a2VhkZGUb1N2XKFNXX1+v48eP64IMP
+1NzcbEx/TU1Nys3NVWFhoeK5ZjAVepOk/fv36/Dhw/r1r3+tt99+Wx988IEx/fX39+vjjz/WD3/4
+Qx0+fFjTpk0b8YFCI0mqQB/8U/j8+fN68803VVdXp3fffVdut1t9fX1D4wZ/O06ZMkX9/f1D6++5
+5x5duHBh1N+CI+07EVKlv/7+flVXV8vj8WjRokWW90uV/gZlZmbK7Xbro48+sjQ+Ffr78MMP9d57
+76mkpETr16/XyZMnLf2vJxV6kzR0Y8CcnByVlpbqr3/9q6X9UqG//Px85efna+7ca/cAXbJkiT7+
++OO45kiqQB8UCoU0ffp0ZWRkqKurS8ePH7e03ze/+U1t3bpVP/3pT9XZaf3WtvPmzdPvf/97SdL7
+77+vf/0r9m1jb+aOCcneX21trQoKCvTUU09Zfo/rJXN/gUBAPT09kqQrV67oxIkTKiwstPxeUnL3
+t27dOjU1NamxsVG7d+/Wfffdp127dll+r2Tu7d///rd6e3slSZcvX9b777+vu+66y/J7ScndX25u
+rmbNmqV//OMfkqS//OUvcX8ZIWn+KXq9b3zjGyosLNRjjz2mWbNmRX0DIdZ5wXnz5ulnP/uZfvKT
+n0SdAxtt32eeeUbr16/Xu+++q29/+9vKzc0d9TTD4JFPd3e3Hn74YT377LNatmyZEf21tLToyJEj
+uvvuu+X1emWz2fT888/roYceMqK/zs5ObdiwYeifax6PRw888IDl3pK9v5uVzL11dXXpmWeekc1m
+08DAgJYuXarvfOc7xvQnST//+c/1wgsvqL+/X7Nnz47/RocRRL788stIf39/JBKJRE6dOhXxer2T
+XFFi0V9qM7k/k3uLRCa+v6Q8Qp9oly5d0nPPPadwOKypU6dq27Ztk11SQtFfajO5P5N7kya+P26f
+O4Lu7m796Ec/GvpTKvL/L0Z46623buqihmRBf6nN5P5M7k0a3/4IdAAwRFJ+ywUAED8CHQAMQaAD
+gCEIdAAwBIEOAIb4f7xSSzfSqaH7AAAAAElFTkSuQmCC
+">
+</img></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>seen_1    673
+seen_2    571
+seen_3    550
+seen_4    607
+seen_5    758
+seen_6    738
+dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [46]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">star_wars</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span><span class="n">decimals</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> 
+        <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()),</span> 
+        <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> 
+        <span class="n">textcoords</span><span class="o">=</span><span class="s1">'offset points'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAEECAYAAADTdnSRAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAALEgAACxIB0t1+/AAAIABJREFUeJzt3X1clFX+//HX4GiaoAKDI4KSSt5k6v5qH7FsZi4IBqzp
+uFnbN+/Cgt3u1LIbTSOyG6ttl7Z+teC3lm9ZuRZgtkKksFl+/WmtmaybrmEapDACwyIoSMD8/mCd
+IpAbZUCu3s9/1rk415nz2bE3x3Nd1xyT0+l0IiIihuLR3QMQEZHOp3AXETEghbuIiAEp3EVEDEjh
+LiJiQAp3EREDale4JycnExMTw4wZM7jvvvuora2loqKC2NhYpk+fzqJFi6isrGzSPjIykqioKLZv
+3+62wYuISMvaDPejR4+yYcMGMjIyeO+996ivr2fz5s2kpKQQGhpKdnY2ISEhJCcnA5Cfn09WVhaZ
+mZmsXbuWxMREdCu9iEjXMrfVwNPTk969e1NdXY2Hhwc1NTVYrVaSk5NZt24dADabjXnz5rFs2TJy
+c3OJjo7GbDYTGBhIUFAQeXl5TJo0ye3FiEjXOXz4MEuXLsVkMuF0OiksLGTx4sWcOHGCDRs24Ovr
+C8DSpUuZMmUKtbW1LF++nIMHD9LQ0MDMmTOJi4tr1m9FRQVLly7l6NGjBAYGkpSUhJeXV1eX1+O1
+OXMfOHAgsbGxTJ06lSlTpuDl5cXPf/5zysrKsFgsAPj5+eFwOACw2+34+/u7zrdardjtdjcNX0S6
+y4gRI9i4cSMZGRmkp6fTr18/IiIiALj11lvJyMggIyODKVOmALB582YA3nvvPdLS0li/fj3Hjh1r
+1u/ZVgWkY9oM98LCQlJTU/nb3/7Gxx9/THV1NZs2bcJkMjVp98PXIvLjsWPHDoYPH+6a2LW0FGux
+WDh16hT19fVUV1fTp08fPD09m7XLycnBZrMBjasCW7dude/gDarNcP/HP/7BFVdcwaBBg+jVqxfT
+pk1jz549+Pr6UlpaCkBJSQk+Pj5A40y9qKjIdX5xcTFWq7XV96irqz+fGkSkm2VmZhITE+N6vW7d
+OmbOnMnDDz/MiRMnALjmmmvw9PRk8uTJhIWFsWjRIgYMGNCsL4fD0eKqgHRMm2vuI0eO5OWXX+b0
+6dP06dOHnTt3MmHCBC6++GLS09OJi4sjIyOD8PBwAMLCwli2bBkLFy7EbrdTUFDAxIkTW32P8vJT
+nVONiHS5uro6cnJyWLjwN5SUVBIZeT033jgfk8lESspLPProapYvf4Ts7ExOnKhi48b3qaio4M47
+b2PMmIn4+w9t0l9Dg5OSku/uvnM6afJavuPnd/ZrEW2G+9ixY5k5cyazZ8/Gw8ODyy67jBtvvJGT
+J0+yZMkS0tLSCAgIICkpCYDg4GCioqKIiYnBbDaTkJCgJRsRA9u5838ZPXoc3t7eAK7/Bbj+ehsP
+PrgUgH/8I48pU36Bh4cH3t7eTJgwiQMHvmgW7j4+PjgcZfj4+FJWVtqkv65UUPA1CQnLXReMjx07
+ym23/ZaKin/z8cfbMJlMDBw4iIcfTmDwYCu1tbU8+WQihw8for6+genTo5k3b2Gzfk+cOEFCwnKK
+i4vw9x/KY4+taXF56nyZLoSv/NVvZZGeKyFhBT/72c+JivolAGVlpfj6Ni6r/OUvb7B//xc8+ugT
+vP32er788l+sWJFAdXU1t9++gMcee5KRI4Ob9PfSS39kwIABzJ27kHXrUqmsrOS3v727y+v6voaG
+Bmy2aFJSUvHyGsDFF18MwDvvrOfQoXwefHAlWVl/Zdeu/8ejjz7B6dM1zJ17Iy+8kMKQIUOa9PXS
+S39k4MCB3HLLgvOur7WZu55QFZFzVlNTw+7dn3Dttb9wHXvppT+yYMGvWbjwv/j888+45557AZg5
+czZ1dXXMn38TcXEL+OUvr3cF+9NPP86//nUAgLlzF/Dpp59w882z2b37U+bOXdjldf3Q3//+CQEB
+gVitQ1zBDlBdXcOAAQMB8PHxpaammvr6empqaujduzf9+/dv1tf27dtcvwijon7Jxx9/6JYxa+Yu
+ItKGp556jDFjxjF79hwAUlJe4v33N9O3b19SUv7HtayyevUqdu3ayenTp7nnnnuZMWNWs76iosLI
+yso96+uO0MxdROQc1dXV8b//+xG/+MU017G4uDtIT99MdPQM/vjH5wDIzs7k9OnTbNqUzYYN7/LW
+W69TVNT8Pv4fctc1SYW7iEgrfnjB+PsiIq7jwIEvgLNfMP6hMxeMAbdeMFa4i4i0YsuWbCIiprte
+f/NNoevPH3/8IZdeOhqAoKBL+PvfPwGgurqaf/5zH0FBlzTr7+qrp5CZ+R4AWVl/ZfLka90ybq25
+i4icRU1NDTfc8Es2bHiXiy9uvDi6cuUDFBYW4OHhwdChASxbthxvbx9qa2tZs2Y1+fkHcTqdxMRc
+z69/PRdovGA8a9YNjBkzlhMnKli1ajnHjxczZIg/jz225py/O6e1NXeFu4g0UV9fz5EjX3X3MDrs
+kktG0qtXr+4eRpc6r4eYROTH5ciRr9j+we/xt3bPw0PnosheDpH3MmrUpd09lAuGwl1EmvG3ejMs
+wLe7hyHnQRdURUQMSOEuImJACncREQPSmruI/Kj8WO4GUriLyI/KkSNf8UxmDgOt/m03vkBU2It4
+IJoO3Q2kcBeRH52BVn+8hw7r7mG4ldbcRUQMSOEuImJAhliWqaqqYs2a1Rw+fAiTyYPlyx9hw4Y3
+KCj4GpPJRGVlJV5eXrz66hvs3/9PnnnmCaBxr8b5828lPDyyWZ9dtRWWiIg7GCLcn3/+d4SGXs3j
+jz9NXV0dp0/XkJj4lOvnL76Y5ArmkSODeeWVdXh4eFBWVsr8+TcxdWp4s6vQ69al8tOfXuXaCuv1
+1//c7Vt9iYi0V5vLMocPH2bWrFnYbDZmzZrFlVdeyWuvvUZFRQWxsbFMnz6dRYsWUVn53Zd/JScn
+ExkZSVRUFNu3b3drASdPVrF37x5iYq4HwGw2079/0xl2bu4WIiKuA+Ciiy7Cw6Ox7NOnT9O/v2eL
+txd11VZYIiLu0Ga4jxgxgo0bN5KRkUF6ejr9+vUjIiKClJQUQkNDyc7OJiQkhOTkZADy8/PJysoi
+MzOTtWvXkpiYiDu/ePLYsWMMHDiIJ59MJDb2Fp5+unFz2jP27t2Dr68vAQGBrmNffLGPefNuZP78
+m7j77qUt9lteXo6PT+N3a/j6WigvL3dbDSIina1DF1R37NjB8OHD8ff3JycnB5vNBoDNZmPr1q0A
+5ObmEh0djdlsJjAwkKCgIPLy8jp/5P9RX1/PwYMHmD17Dq+++gZ9+/bl9ddTXT/fsiWbadOmNznn
+sssu5/XXN/Dqq+t4/vnnOHmyqs33cddWWCIi7tChcM/MzOSXv2xcqigrK8NisQDg5+eHw+EAwG63
+4+//3cMBVqsVu93eWeNtZvDgwQwePISxYy8DYOrUcA4e/BfQGPwfffS3Fi+YAgwffgkBAYEUFhY2
++1lXbYUlIuIO7Q73b7/9ltzcXK67rnHt+ocz2e6a2fr4+GK1Wiko+BqA3bs/4ZJLRgDw6ae7CAq6
+BIvFz9W+qOgY9fX1ABQXF/HNN4UMG9b8YYau2gpLRMQd2n23zEcffcT48ePx8fEBwNfXl9LSUiwW
+CyUlJa7jVquVoqIi13nFxcVYrdZW+/b2vhiz+dx3UElMTODhhx+mrq6OYcOG8dRTT+Hl5cWOHR9i
+s81sslvJjh0HWLHiPnr37o3ZbOaJJx7nkksa/6WxcuVKbr75ZsaPH8/ixXeyZMkS3n//rwQEBJCU
+lMSAAee2FZZIT1Je7smh7h7EOfDx8Wx1Z6Izyst75i3N7a3vjHZvs3fvvfdyzTXXuNbZn332WQYO
+HEhcXBwpKSmcOHGCZcuWkZ+fz7Jly9iwYQN2u53Y2Fg++OCDVmf22mZP5MJx6NCXHNr75x61WUfh
+0TJGTbq1Xd+9cujQlyTv/qJHff1A+bFC4q+8rFl9rYV9u5Zlqqur2bFjBxEREa5jt99+Ozt27GD6
+9Ons3LmTuLg4AIKDg4mKiiImJoa4uDgSEhJ0MVJEpIu1a1mmX79+7Ny5s8mxQYMGkZqa2mL7+Ph4
+4uPjz3twIiJybvTdMiIiBqRwFxExoAv2u2V+LLuliIi4wwUb7keOfMXy5/5C/4F+bTe+QJysKOGp
++27q0G4pIiLucMGGO0D/gX4M8Ok5W2GJiFwotOYuImJACncREQO6oJdlRHq6lnYJGzZseIu7fH3w
+wfu89dZrmEwmnE4nhw7l8+qrbxAc3PQajnYJk/bQzF3Ejc7sEvbGG++QmvomQUGXuHb5euutdK64
+4qe8/vqfAYiMvI4///lNXn31DVateoyhQwOaBTtw1vNFvk/hLuImLe0S5unp2a5dvrZsyT7rV1Vr
+lzBpD4W7iJu0tEtYTU0NDoejzV2+cnO3NNtk5gztEibtoXAXcZMf7hLWr19f1q1LbXMvhC++2Eff
+vv0YMWJku95HX8wnLVG4i7jJD3cJu/bacA4ePNDmLl85OR+cddYO2iVM2kfhLuImLe8SNrLVXb6c
+Tie5uVuZNq3l9XbQLmHSPgp3ETdavHgZjz22ioUL/4v8/C+ZPz+WuXMX8Omnn3DzzbPZvftT5s5d
+6Gr/+eefYbUOwd9/aJN+nn76cf71rwMArZ4vcobucxdxo0svHc1///drzY4///xLLbb/P//nSv70
+p1ebHX/wwZWuPw8YMPCs54ucoZm7iIgBaeZ+gbvhhhn07++Jh4cJs9nM2rWvkZCwnMLCAgAqKyvx
+8vLi1Vff4MSJClaufJD9+78gJmYGS5bc32KfesJRxPgU7hc4k8mDF15IZsCAAa5jiYlPuf784otJ
+rmDu0+cibr/9t3z11SEOHz77/vVnnnC85ZYFrFuXyuuv/5nf/vZu9xUhIl2uXcsylZWV3HPPPa6N
+r/fu3UtFRQWxsbFMnz6dRYsWUVlZ6WqfnJxMZGQkUVFRbN++3W2D/3Fw4nQ2nPWnublbiIi4DoC+
+ffsyYcIk+vTp02qPesJRxPjaFe5PPPEE1157LVlZWbz77ruMHDmSlJQUQkNDyc7OJiQkhOTkZADy
+8/PJysoiMzOTtWvXkpiYiNPpdGsRxmZi6dI7ue22+WzalNHkJ3v37sHX15eAgMAO9agnHEWMr81l
+maqqKv7+97+zZs2axhPMZry8vMjJyWHdunUA2Gw25s2bx7Jly8jNzSU6Ohqz2UxgYCBBQUHk5eUx
+adIk91ZiUC+//AoWS2MAL116J0FBI5g06SdA4/ePtPawS3vpCceO0RaQ0hO0Ge7ffPMN3t7eLF++
+nAMHDnD55ZezYsUKysrKsFgsAPj5+eFwOACw2+385Cc/cZ1vtVqx2+1uGr7xnfn/2NvbmylTprJ/
+/z4mTfoJ9fX1fPTR33j11XUd7vPME44+Pr56wvEcHDnyFcnPp+E9cHB3D6XdyiuOE7/4V9oC8kek
+zXCvq6vjiy++4JFHHmHChAk8+eSTpKSktPn9GB3h7X0xZnPTGUV5ec+8e8PHxxM/P69O6au6upqG
+hgb69+/PqVOn2LPnU+666y78/Lz46KOPCA4exbhxzb9/xMurL3379j7rOCIiprFt2wfExcWRkfEW
+kZERnTbmjgoLC8PT0xMPDw/MZjPvvPMOL774Ihs2bMDXt3HpaOnSpUyZMgVovJ6TlpZGr169ePjh
+h5k8eXKzPisqKli6dClHjx4lMDCQpKQkvLw6r77yck+8Bw7G4ju07cYXkPb+3Swv9+Tsl+MvXB2p
+ryfqaLa0Ge5DhgxhyJAhTJgwAYDIyEjWrl2Lr68vpaWlWCwWSkpK8PHxARpn6kVFRa7zi4uLsVqt
+rb5HefmpZsccjqp2F3EhcTiqKCmpbLthOxw7dpQVK+7HZGpcCoiIiGLMmEmUlFSSkbGJa6+d1uy9
+5sy5nlOnTvLtt3V88MEW/vCH/0tQ0CU8/fTjzJp1A2PGjGX27JtZtWo5Gza8zZAh/jz22JpOG3NH
+NTTAH/7wsutuoJKSSk6ePM2cOTfz61/PdbUrKankyJHDvPfeX/mf//kLJSXHWbLkDtavz2g2sXjp
+pReZOPEKnn76edatS+UPf3ihU+8GMvrfTdV3YWqpvtbCvs1wt1gs+Pv7c/jwYUaMGMHOnTsJDg4m
+ODiY9PT0/8z+MggPDwcaZ2LLli1j4cKF2O12CgoKmDhx4nmW9eM0dGgAqalvtvizFSsSWjz+9tub
+Wjx+4T7h2PLdQC1dg//4422Eh0diNpvx9x9KYOBwvvjin4wff3mTdtu3b+PFF1OAxruB7r47Xrd6
+yo9Ou+5zX7lyJcuWLaOuro5hw4bx1FNPUV9fz5IlS0hLSyMgIICkpCQAgoODXbdMms1mEhISdMFO
+WtF4N5CHRy+uv97G9dfbAEhP30B2diZjx47jrruW4unpSWnpccaP/26i4OfnR2np8WY96m4gkXaG
++9ixY0lLS2t2PDU1tcX28fHxxMfHn9fA5MehpbuBbLY53Hrr7ZhMJlJSXuLFF//AQw+tOuf30ORC
+foz03TLSrVq6G8jb29sVyNdfb2P//n/+p+1gjh8vdp17/PhxLJbmd6zo+85FFO7SjWpqajh1qvFi
+enV1NZ9+upORI4MpKyt1tdm2LZcRI0YBMHnyFHJyPuDbb7/l2LGjHD1ayGWXjW/Wr77vXETfLSPd
+yOEoa3Y30FVX/YzVqx8hP/8gJpMH/v7+3H//CgBGjBhJWFgEc+fOwWw2c999D7lm+N+/G2ju3AWs
+WrWczZs3ue4GEvmxUbh3k574lGNnP+F4truBVq167KznzJt3K/Pm3drs+IV7N5BI91C4d5MjR75i
+1duP4WkZ0HbjC0BV6QlWz3lETziK9BAK927kaRnAwCG62CcinU8XVEVEDEjhLiJiQFqWEbfQBWOR
+7qVwF7c4cuQrtqx8iCE9ZG/W4qoqIh5fowvGYhgKd3GbIZ6eBAwY2N3DEPlR0pq7iIgBKdxFRAxI
+4S4iYkAKdxERA1K4i4gYkMJdRMSAFO4iIgakcBcRMaB2PcQUFhaGp6cnHh4emM1m3nnnHSoqKli6
+dClHjx4lMDCQpKQkvLy8AEhOTiYtLY1evXrx8MMPM3nyZLcWISIiTbVr5m4ymXj99dfZuHEj77zz
+DgApKSmEhoaSnZ1NSEgIycnJAOTn55OVlUVmZiZr164lMTERp9PpvgpERKSZdoW70+mkoaGhybGc
+nBxsNhsANpuNrVu3ApCbm0t0dDRms5nAwECCgoLIy8vr5GGLiEhr2j1zj42N5Ve/+hVvv/02AGVl
+Za6d6/38/HA4HADY7Xb8/f1d51qtVux2e2ePW0REWtGuNfe33nqLwYMH43A4iI2NZcSIEa6Nic/4
+4euO8Pa+GLO56Vetlpf3jG8T/CEfH0/8/LzabNcT62tvbWDs+npibdCx+g51wXg6mz6/ptoV7oMH
+D/5P5z5MmzaNvLw8fH19KS0txWKxUFJSgo+PD9A4Uy8qKnKdW1xcjNVqbbX/8vJTzY45HFXtLuJC
+4nBUUVJS2a52PU17azvTtqcx8mcHqu/77XqiluprLezbXJaprq7m5MmTAJw6dYrt27czevRowsLC
+SE9PByAjI4Pw8HCg8c6azMxMamtrKSwspKCggIkTJ55zQSIi0nFtztxLS0u56667MJlM1NfXM2PG
+DCZPnszll1/OkiVLSEtLIyAggKSkJACCg4OJiooiJiYGs9lMQkLCeS3ZiIhIx7UZ7sOGDePdd99t
+dnzQoEGkpqa2eE58fDzx8fHnPTgRETk3ekJVRMSAFO4iIgakcBcRMSCFu4iIASncRUQMSOEuImJA
+CncREQNSuIuIGJDCXUTEgBTuIiIGpHAXETEghbuIiAEp3EVEDEjhLiJiQAp3EREDUriLiBiQwl1E
+xIAU7iIiBqRwFxExoHaHe0NDAzabjd/85jcAVFRUEBsby/Tp01m0aBGVlZWutsnJyURGRhIVFcX2
+7ds7f9QiItKqdof7a6+9xqhRo1yvU1JSCA0NJTs7m5CQEJKTkwHIz88nKyuLzMxM1q5dS2JiIk6n
+s/NHLiIiZ9WucC8uLmbbtm3MmTPHdSwnJwebzQaAzWZj69atAOTm5hIdHY3ZbCYwMJCgoCDy8vLc
+MHQRETmbdoX7k08+yQMPPIDJZHIdKysrw2KxAODn54fD4QDAbrfj7+/vame1WrHb7Z05ZhERaYO5
+rQYffvghFouFcePGsWvXrrO2+37wd5S398WYzb2aHCsv9zzn/rqTj48nfn5ebbbrifW1tzYwdn09
+sTboWH2HumA8nU2fX1Nthvtnn31Gbm4u27Zt4/Tp05w8eZL7778fi8VCaWkpFouFkpISfHx8gMaZ
+elFRkev84uJirFZrq+9RXn6q2TGHo6rdRVxIHI4qSkoq29Wup2lvbWfa9jRG/uxA9X2/XU/UUn2t
+hX2byzL33nsvH374ITk5Ofz+978nJCSEZ599ll/84hekp6cDkJGRQXh4OABhYWFkZmZSW1tLYWEh
+BQUFTJw48XxqEhGRDmpz5n42cXFxLFmyhLS0NAICAkhKSgIgODiYqKgoYmJiMJvNJCQknNeSjYiI
+dFyHwv2qq67iqquuAmDQoEGkpqa22C4+Pp74+PjzHpyIiJwbPaEqImJACncREQNSuIuIGJDCXUTE
+gBTuIiIGpHAXETEghbuIiAEp3EVEDEjhLiJiQAp3EREDUriLiBiQwl1ExIAU7iIiBqRwFxExIIW7
+iIgBKdxFRAxI4S4iYkAKdxERA1K4i4gYUJvhXltby5w5c5g1axYxMTH8/ve/B6CiooLY2FimT5/O
+okWLqKysdJ2TnJxMZGQkUVFRbN++3X2jFxGRFrUZ7n369OG1115j48aNbNq0iZ07d7J7925SUlII
+DQ0lOzubkJAQkpOTAcjPzycrK4vMzEzWrl1LYmIiTqfT7YWIiMh32rUs069fP6BxFt/Q0MDAgQPJ
+ycnBZrMBYLPZ2Lp1KwC5ublER0djNpsJDAwkKCiIvLw8Nw1fRERa0q5wb2hoYNasWVx99dVcddVV
+BAcHU1ZWhsViAcDPzw+HwwGA3W7H39/fda7VasVut7th6CIicjbm9jTy8PBg48aNVFVVsWjRInbt
+2oXJZGrS5oevO8Lb+2LM5l5NjpWXe55zf93Jx8cTPz+vNtv1xPraWxsYu76eWBt0rL5DXTCezqbP
+r6l2hfsZnp6eTJkyhX379uHr60tpaSkWi4WSkhJ8fHyAxpl6UVGR65zi4mKsVmur/ZaXn2p2zOGo
+6sjQLhgORxUlJZXtatfTtLe2M217GiN/dqD6vt+uJ2qpvtbCvs1lGYfD4boTpqamhh07dnDZZZcR
+FhZGeno6ABkZGYSHhwMQFhZGZmYmtbW1FBYWUlBQwMSJE8+5IBER6bg2Z+4lJSU89NBDOJ1OGhoa
+mDlzJqGhoYwbN44lS5aQlpZGQEAASUlJAAQHBxMVFUVMTAxms5mEhITzWrIREZGOazPcx4wZQ0ZG
+RrPjgwYNIjU1tcVz4uPjiY+PP+/BiYjIudETqiIiBqRwFxExIIW7iIgBKdxFRAxI4S4iYkAKdxER
+A1K4i4gYkMJdRMSAFO4iIgakcBcRMSCFu4iIASncRUQMSOEuImJACncREQNSuIuIGJDCXUTEgBTu
+IiIGpHAXETEghbuIiAG1Ge7FxcXMnz+fmJgYZsyYwWuvvQZARUUFsbGxTJ8+nUWLFlFZWek6Jzk5
+mcjISKKioti+fbv7Ri8iIi1qM9x79erF8uXL2bx5M+vXr+eNN97g0KFDpKSkEBoaSnZ2NiEhISQn
+JwOQn59PVlYWmZmZrF27lsTERJxOp9sLERGR77QZ7n5+fowbNw6A/v37M2rUKOx2Ozk5OdhsNgBs
+Nhtbt24FIDc3l+joaMxmM4GBgQQFBZGXl+fGEkRE5Ic6tOb+zTffcODAASZNmkRZWRkWiwVo/AXg
+cDgAsNvt+Pv7u86xWq3Y7fZOHLKIiLTF3N6GJ0+e5J577mHFihX0798fk8nU5Oc/fN0R3t4XYzb3
+anKsvNzznPvrTj4+nvj5ebXZrifW197awNj19cTaoGP1HeqC8XQ2fX5NtSvc6+rquOeee5g5cybT
+pk0DwNfXl9LSUiwWCyUlJfj4+ACNM/WioiLXucXFxVit1lb7Ly8/1eyYw1HV7iIuJA5HFSUlle1q
+19O0t7YzbXsaI392oPq+364naqm+1sK+XcsyK1asIDg4mAULFriOhYWFkZ6eDkBGRgbh4eGu45mZ
+mdTW1lJYWEhBQQETJ07scCEiInLu2py57969m/fee4/Ro0cza9YsTCYTS5cu5fbbb2fJkiWkpaUR
+EBBAUlISAMHBwURFRRETE4PZbCYhIeG8lmxERKTj2gz3K6+8kv3797f4s9TU1BaPx8fHEx8ff14D
+ExGRc6cnVEVEDEjhLiJiQAp3EREDUriLiBiQwl1ExIAU7iIiBqRwFxExIIW7iIgBKdxFRAxI4S4i
+YkAKdxERA1K4i4gYkMJdRMSAFO4iIgakcBcRMSCFu4iIASncRUQMSOEuImJAbYb7ihUr+PnPf86M
+GTNcxyoqKoiNjWX69OksWrSIysrvduROTk4mMjKSqKgotm/f7p5Ri4hIq9oM99mzZ/PKK680OZaS
+kkJoaCjZ2dmEhISQnJwMQH5+PllZWWRmZrJ27VoSExNxOp3uGbmIiJxVm+H+05/+lAEDBjQ5lpOT
+g81mA8Bms7F161YAcnNziY6Oxmw2ExgYSFBQEHl5eW4YtoiItOac1twdDgcWiwUAPz8/HA4HAHa7
+HX9/f1c7q9WK3W7vhGGKiEhHdMoFVZPJ1BndiIhIJzGfy0m+vr6UlpZisVgoKSnBx8cHaJypFxUV
+udoVFxdjtVrb7M/b+2LM5l5NjpWXe57L0Lqdj48nfn5ebbbrifW1tzYwdn09sTboWH2HumA8nU2f
+X1PtCvcfXhQNCwsjPT2duLg4MjIyCA8Pdx1ftmwZCxcuxG63U1BQwMSJE9vsv7z8VLNjDkdVe4Z2
+wXE4qihNkd75AAAHz0lEQVQpqWxXu56mvbWdadvTGPmzA9X3/XY9UUv1tRb2bYb7fffdx65du/j3
+v//N1KlTufvuu4mLi2Px4sWkpaUREBBAUlISAMHBwURFRRETE4PZbCYhIUFLNiIi3aDNcH/uueda
+PJ6amtri8fj4eOLj489rUCIicn70hKqIiAEp3EVEDEjhLiJiQAp3EREDUriLiBiQwl1ExIAU7iIi
+BqRwFxExIIW7iIgBKdxFRAxI4S4iYkAKdxERA1K4i4gYkMJdRMSAFO4iIgakcBcRMSCFu4iIASnc
+RUQMSOEuImJAbgv3jz76iOuuu47p06eTkpLirrcREZEWuCXcGxoaWL16Na+88gp//etf2bx5M4cO
+HXLHW4mISAvcEu55eXkEBQUREBBA7969iYmJIScnxx1vJSIiLXBLuNvtdvz9/V2vrVYrx48fd8db
+iYhIC8zdPYDWnKwo6e4hdEhHx1tVesJNI+l85zLW4qoqN4zEPYqrqpjQgfblFT1rstLR8RbZy900
+EvcospczqgPtK+xFbhuLOzSO97IOnWNyOp3Ozh7I559/zgsvvMArr7wC4LqgGhcX19lvJSIiLXDL
+ssyECRMoKCjg6NGj1NbWsnnzZsLDw93xViIi0gK3LMv06tWLVatWERsbi9Pp5IYbbmDUqI78o0lE
+RM6HW5ZlRESke+kJVRERA1K4i4gYkMJdRMSAFO4iIgZ0QT/EdKG47bbb2Lt3L1deeSV/+tOfuns4
+nerAgQM8+uijnDx5Eg8PD+Lj44mOju7uYXWaY8eOcdddd+F0Ovn222+ZM2cOCxYs6O5hdbqqqipi
+YmKIiIhg5cqV3T2cTjNu3DjGjh2L0+lk6NChvPTSS909pE5VVFTEypUrKSoqwsPDg5SUFIYOHdop
+fetumXbYuXMnNTU1rF+/3nDh/vXXX2MymRg+fDjHjx9n9uzZvP/++3h6enb30DpFXV0dTqeT3r17
+U11dTUxMDG+++SZDhgzp7qF1qieeeILy8nIGDRpkqHC/4oor+Oyzz7p7GG4zb9487rjjDkJDQ6mu
+rsbDw4OLLrqoU/rucTP36upqlixZgt1up76+njvuuIPhw4ezZs0aTp06hbe3N2vWrMFisVBYWEhi
+YiLl5eX069eP1atXM2LECJYvX07//v3Zt28fZWVl3H///URGRp71PX/2s5/xySefGLK+oKAg158H
+Dx6Mr68vDofDbeHe1fWZzd/9Fa+pqaF379707dvXLbV1R30A+/btw+FwcM0117Bv3z5D1daVc8+u
+ru/QoUM0NDQQGhoKQL9+/Tq3IGcPk52d7Vy1apXrdWVlpfOmm25yOhwOp9PpdG7evNm5fPlyp9Pp
+dC5YsMD59ddfO51Op3Pv3r3O+fPnO51Op/Ohhx5yLl682Ol0Op35+fnOiIiINt93165dzvj4+E6t
+pSXdVd+ZPqKjozutlpZ0R31FRUXOGTNmOCdNmuRct25dp9f0fV1dX0NDg3Pu3LnO4uJiZ3p6unP1
+6tVuqcvp7J7Pbvz48U6bzea86aabnFu2bOn0mr6vq+vbsmWLMz4+3nnXXXc5bTab85lnnnE2NDR0
+Wj09buY+evRonn76aZ577jmuvfZaBg4cyJdfful6GrahoYHBgwdz6tQp9uzZw+LFi12//evq6lz9
+TJs2DYBRo0ZRVlbWLbW0pLvqO378OA888ADPPPOMewr7j+6ob8iQIWzatImSkhLmzp3LNddcw/Dh
+ww1R35tvvsnUqVOxWq2Ae2e63fHZ5ebmMnjwYAoLC1mwYAFjxoxh2LBhhqivvr6e3bt3s3HjRvz9
+/VmyZAnp6en86le/6pR6ely4X3LJJWRkZLBt2zaef/55QkJCuPTSS1m/fn2TdlVVVQwYMICMjIwW
+++nTp4/rz+78D6KjuqO+qqoqfvOb33DfffcxceLE8y+iFd35+fn5+XHllVeyf/9+t4V7V9e3Z88e
+PvvsM958801OnjxJXV0d/fv359577+2cgr6nOz67wYMHAzBs2DBCQkLYv3+/28K9q+sbMmQIY8eO
+JSAgAIDw8HDy8vI6Ldx73K2Qx48fp2/fvsyYMYNFixaRl5dHeXk5n3/+OdD4GzQ/Px9PT08CAwN5
+//33XeceOHCgxT7bEw5d9Qugq+v79ttvufPOO5k1axYRERGdW0wLuro+u93O6dOnAaioqGDPnj2M
+Hj26Eytqqqvr+93vfkdubi45OTk8+OCDzJo1yy3BDl1f24kTJ6itrQXA4XDw2WefufU7qrq6vgkT
+JlBZWUl5eePXK+/cubNT6+txM/eDBw/yzDPP4OHhQe/evXn00Ufp1asXjz/+OJWVlTQ0NDB//nyC
+g4N59tlnefTRR3n55Zepr68nOjqasWPHNuvTZDK1+p633HILhw8f5tSpU0ydOpUnnniCq6++2hD1
+ZWVlsXv3bk6cOEF6ejomk4mnnnqqxX56Yn2HDh1izZo1eHh4YDKZiI+PZ8SIEW6prTvq60rd8dk9
+8sgj9OrVi4aGBuLj490a7l1dn4eHBw8++KDr1tzx48dz4403dlo9uhVSRMSAetyyjIiItK3HLcu4
+y8GDB3nggQdc/4xyOp1cdNFF/OUvf+nmkXUO1dezGbk+I9cG3VeflmVERAxIyzIiIgakcBcRMSCF
+u4iIASncRUQMSOEuImJA/x8IlhjyQBMrUQAAAABJRU5ErkJggg==
+">
+</img></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exploring-The-Data-By-Binary-Segments">Exploring The Data By Binary Segments<a class="anchor-link" href="#Exploring-The-Data-By-Binary-Segments">¶</a></h3><p>We've seen what the whole survey population thinks are the highest ranked movies, but we can break this down by segments.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [47]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">males</span> <span class="o">=</span> <span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="p">[</span><span class="s2">"Gender"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Male"</span><span class="p">]</span>
+<span class="n">females</span> <span class="o">=</span> <span class="n">star_wars</span><span class="p">[</span><span class="n">star_wars</span><span class="p">[</span><span class="s2">"Gender"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Female"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [51]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">Most_seen</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span><span class="n">decimals</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> 
+            <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()),</span> 
+            <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> 
+            <span class="n">textcoords</span><span class="o">=</span><span class="s1">'offset points'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">Most_seen</span><span class="p">(</span><span class="n">males</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+/PHHvVKXYTTMa9etWzfDZrMZd911l7F169Y6r+mH6ru+rVu3Gna73Zg8ebJhs9mMpUuXGi6Xq87q
+8bkr986dO/P000/z3HPPcfvtt9OqVSu++uor92pYl8tFu3btOHfuHJ999hnTpk1z//UvLS119zN4
+8GAAOnXqxKlTpxqkFk8aqr4TJ04we/Zsli5d6p3C/qMh6mvfvj3vvfceBQUFjB49mttuu40OHTqY
+or633nqLQYMGYbVaAe9e6TbEa7d9+3batWvHsWPHGDt2LDfddBPXXXedKeorKytj7969bNiwgbCw
+MKZPn8769eu5884766Qenwv366+/nrS0ND7++GNeeOEF+vXrx4033sjbb79drl1xcTEtW7YkLS3N
+Yz9NmzZ1/+zN/xC11RD1FRcXM2nSJGbOnEmPHj2uvogqNOTrFxoaSu/evTl48KDXwr2+6/vss8/Y
+t28fb731FmfPnqW0tJTAwEAeeuihuinoBxritWvXrh0A1113Hf369ePgwYNeC/f6rq99+/Z06dKF
+8PBwAGJiYsjOzq6zcPe5WyFPnDjBNddcw7Bhw0hOTiY7O5vCwkL2798PXP4LevjwYYKCgoiIiODD
+Dz90n3vo0CGPfdYkHOrrD0B911dSUsKDDz5IYmIiQ4YMqdtiPKjv+hwOBxcvXgTg9OnTfPbZZ3Tu
+3LkOKyqvvut79tln2b59O5mZmTzyyCMkJiZ6Jdih/ms7c+YMly5dAsDpdLJv3z6v7lFV3/V1796d
+oqIiCgsvb6+8a9euOq3P567cv/zyS5YuXYq/vz9NmjThscceIyAggD/84Q8UFRXhcrkYM2YMkZGR
+PPPMMzz22GO88sorlJWVER8fT5cuXSr06efnV+Vz3nffffzrX//i3LlzDBo0iCeeeIIBAwaYor6M
+jAz27t3LmTNnWL9+PX5+fjz11FMe+/HF+nJycliyZAn+/v74+flht9u54YYbvFJbQ9RXnxritfv9
+739PQEAALpcLu93u1XCv7/r8/f155JFH3LfmduvWjVGjRtVZPboVUkTEhHxuWkZERKrnc9My3vLl
+l18ye/Zs99sowzBo1qwZf/7znxt4ZHVD9fk2M9dn5tqg4erTtIyIiAlpWkZExIQU7iIiJqRwFxEx
+IYW7iIgJKdxFREzo/wPjmRqWksJNMQAAAABJRU5ErkJggg==
+">
+</img></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [52]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">Rate</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">Rate</span><span class="p">(</span><span class="n">males</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+HTpx4oSl7b75zW9q+/bt+ulPf6r2duu3tl2wYIF+//vfS5Lef/99/fOf8W8bezN3TJjs/VVXV2vO
+nDlatWqV5c+40WTuLxgMqqurS5J09epVnTx5Uvn5+ZY/S5rc/W3YsEENDQ2qr6/Xnj17dO+99+ql
+l16y/FmTubd//etf6u7uliRduXJF77//vu666y7LnyVN7v5ycnI0a9Ys/f3vf5ck/eUvf0n4ywiT
+5p+iN/rGN76h/Px8PfbYY5o1a1bMNxDinRdcsGCBfvazn+knP/lJzDmwkbZ9+umntXHjRr377rv6
+9re/rZycnBFPM/TPfDo7O/XQQw/pmWee0eOPP25Ef01NTTp69Kjmzp0rn88nm82m5557Tg8++KAR
+/bW3t2vTpk0D/1zzer26//77Lfc22fu7WZO5t46ODj399NOy2Wzq6+vTsmXL9J3vfMeY/iTp5z//
+uZ5//nn19vZq9uzZid/oMIroV199Fe3t7Y1Go9Ho6dOnoz6fb4IrSi76S20m92dyb9Ho+Pc3KWfo
+4+3y5ct69tlnFYlENHXqVO3cuXOiS0oq+kttJvdncm/S+PfH7XOH0dnZqR/96EcDf0pF/+dihLfe
+euumLmqYLOgvtZncn8m9SWPbH4EOAIaYlN9yAQAkjkAHAEMQ6ABgCAIdAAxBoAOAIf4bRqZG3rGP
+pGQAAAAASUVORK5CYII=
+">
+</img></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [53]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Rate</span><span class="p">(</span><span class="n">females</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+">
+</img></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+  </div>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="<< YOUR AD CLIENT>>"
+         data-ad-slot="<< AD-SLOT FOR THE RESPONSIBLE BANNER >>"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+  <div class="tag-cloud">
+    <p>
+      <a href="https://0dave.github.io/tag/python-seventh-post.html">Python seventh post</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'yoursite';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; David Sh Wang 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+<!-- StatusCake -->
+<a href="https://www.statuscake.com" title="Dave's Blog Uptime">
+  <img src="https://www.statuscake.com/App/button/index.php?Track=your-id&amp;Days=7&amp;Design=6" alt="Dave's Blog Uptime"/>
+</a>
+
+<script type="text/javascript">var SC_RumID = 1234;</script>
+<script type="text/javascript" async src="https://www.statuscake.com/App/RUM/embed.js"></script>
+<!-- End StatusCake --></p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1234-5678', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-77hh6723hhjd" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Dave's Blog ",
+  "url" : "https://0dave.github.io",
+  "image": "//i0.wp.com/www.davidshwang.com/wp-content/uploads/2017/01/profile.jpg?resize=300%2C300",
+  "description": "David Sh Wang's Data Science and Thoughts"
+}
+</script>
+</body>
+</html>
